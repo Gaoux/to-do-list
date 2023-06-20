@@ -3,8 +3,9 @@ import { TaskSearchBar } from './components/TaskSearchBar';
 import { TaskList } from './components/TaskList';
 import { TaskItem } from './components/TaskItem';
 import { AddTaskButton } from './components/AddTaskButton';
-import React from 'react';
 import { AddTaskPopup } from './components/AddTaskPopup';
+import React from 'react';
+import { useState } from 'react';
 
 // const defaultTasks = [
 //   { id: 1, text: 'Cut hair', completed: false },
@@ -20,6 +21,7 @@ const defaultTasks = [
 ];
 
 function App() {
+  const [activeAddTaskBtn, setActiveAddTaskBtn] = useState(false);
   return (
     //This is jsx code (es javascript + xml)
     <React.Fragment>
@@ -35,8 +37,14 @@ function App() {
           />
         ))}
       </TaskList>
-      <AddTaskButton />
-      <AddTaskPopup trigger={true}></AddTaskPopup>
+      <AddTaskButton
+        active={activeAddTaskBtn}
+        setActive={setActiveAddTaskBtn}
+      />
+      <AddTaskPopup
+        trigger={activeAddTaskBtn}
+        setTrigger={setActiveAddTaskBtn}
+      ></AddTaskPopup>
     </React.Fragment>
   );
 }

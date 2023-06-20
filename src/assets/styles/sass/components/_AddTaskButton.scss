@@ -5,18 +5,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: $color-alpha;
-  @include add-close-btn;
-  .line {
-    transform: translate(-50%, -50%) rotate(90deg);
-
-    &:nth-child(2) {
-      transform: translate(-50%, -50%);
-    }
-  }
-  &:hover .line {
-    width: 22px;
-  }
+  @include add-btn;
 }
 
 .add-task-btn.active {
