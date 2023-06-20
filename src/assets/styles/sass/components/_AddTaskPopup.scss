@@ -10,8 +10,9 @@
     height: 50%;
     overflow: hidden;
     @include section;
-    background-color: $primary-color;
-    // border: solid 1px $white;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: $secondary-color;
 
     .header {
       width: 100%;

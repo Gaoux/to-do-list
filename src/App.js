@@ -1,5 +1,5 @@
-import { TaskCounter } from './components/TaskCounter';
-import { TaskSearchBar } from './components/TaskSearchBar';
+import { Navbar } from './components/Navbar';
+import { Categories } from './components/Categories';
 import { TaskList } from './components/TaskList';
 import { TaskItem } from './components/TaskItem';
 import { AddTaskButton } from './components/AddTaskButton';
@@ -25,9 +25,9 @@ function App() {
   return (
     //This is jsx code (es javascript + xml)
     <React.Fragment>
+      <Navbar />
       <h1>Your Tasks</h1>
-      <TaskCounter completed={2} total={5} />
-      <TaskSearchBar />
+      <Categories completed={2} total={5} />
       <TaskList>
         {defaultTasks.map((task) => (
           <TaskItem

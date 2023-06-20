@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidFaStar } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faXmark } from '@fortawesome/free-solid-svg-icons';
+// import { faStar } from '@fortawesome/free-regular-svg-icons';
+// import { faStar as solidFaStar } from '@fortawesome/free-solid-svg-icons';
 
 function AddTaskPopup(props) {
-  const [Favorite, setFavorite] = useState(false);
-  const handleStarClick = () => {
-    setFavorite(!Favorite);
-  };
+  // const [Favorite, setFavorite] = useState(false);
+  // const handleStarClick = () => {
+  //   setFavorite(!Favorite);
+  // };
   return props.trigger ? (
     <div className="add-task-popup">
       <div className="add-task-popup__inner">

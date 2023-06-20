@@ -1,0 +1,181 @@
+@use '../abstracts/variables' as *;
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 24px;
+  background-color: $secondary-color;
+  //   border-bottom-left-radius: 20px;
+  //   border-bottom-right-radius: 20px;
+  margin-bottom: 24px;
+
+  .menuToggle {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 30px;
+    left: 10px;
+    z-index: 1;
+    -webkit-user-select: none;
+    user-select: none;
+    a {
+      text-decoration: none;
+      color: $white;
+      opacity: 1;
+      font-size: $md;
+      //   font-weight: 400;
+      transition: 200ms;
+    }
+    a:hover {
+      opacity: 0.5;
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+    }
+
+    input {
+      display: flex;
+      width: 40px;
+      height: 32px;
+      position: absolute;
+      cursor: pointer;
+      opacity: 0;
+      z-index: 2;
+    }
+    span {
+      display: flex;
+      width: 22px;
+      height: 2px;
+      margin-bottom: 5px;
+      position: relative;
+      background: $white;
+      border-radius: 3px;
+      z-index: 1;
+      transform-origin: -0.9px 0px;
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+        background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+    }
+    span:first-child {
+      transform-origin: 0% 0%;
+    }
+    span:nth-last-child(3) {
+      width: 15px;
+    }
+    span:nth-last-child(2) {
+      transform-origin: 0% 100%;
+    }
+    input:checked ~ span {
+      opacity: 1;
+      transform: rotate(45deg) translate(-3px, -1px);
+      background: $white;
+    }
+    input:checked ~ span:nth-last-child(3) {
+      opacity: 0;
+      transform: rotate(0deg) scale(0.2, 0.2);
+    }
+    input:checked ~ span:nth-last-child(2) {
+      transform: rotate(-45deg) translate(0, -1px);
+    }
+    .menu {
+      position: absolute;
+      width: 250px;
+      height: 650px;
+      margin: -50px 0 0 -50px;
+      padding: 50px;
+      padding-top: 125px;
+      background-color: $secondary-color;
+      border-bottom-right-radius: 20px;
+      -webkit-font-smoothing: antialiased;
+      transform-origin: 0% 0%;
+      transform: translate(-100%, 0);
+      transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+
+      li {
+        padding: 24px 0;
+        transition-delay: 2s;
+        & > * {
+          margin-left: 16px;
+        }
+        & > *:first-child {
+          color: $color-beta;
+          padding-bottom: 1px;
+        }
+      }
+    }
+    input:checked ~ ul {
+      transform: none;
+    }
+    li:last-child {
+      position: absolute;
+      bottom: 60px;
+      border-top: solid 1px $very-light-grey;
+      padding-top: 50px;
+    }
+  }
+  .search-box {
+    // width: fit-content;
+    // height: fit-content;
+    position: relative;
+    top: 15px;
+    right: -10px;
+    margin: 0;
+    padding: 0;
+    .input-search {
+      position: absolute;
+      top: 60px;
+      right: -14px;
+      height: 50px;
+      width: 40px;
+      border-style: none;
+      padding: 10px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      outline: none;
+      border-radius: 25px;
+      transition: all 0.4s ease-in-out;
+      background: none;
+      padding-right: 40px;
+      color: $white;
+    }
+    .input-search::placeholder {
+      color: $very-light-grey;
+      font-size: $sm;
+      letter-spacing: 2px;
+      font-weight: 100;
+    }
+    .btn-search {
+      width: 50px;
+      height: 50px;
+      border-style: none;
+      font-size: 20px;
+      font-weight: bold;
+      outline: none;
+      cursor: pointer;
+      border-radius: 50%;
+      position: absolute;
+      right: 0px;
+      color: $white;
+      background-color: $secondary-color;
+      pointer-events: painted;
+    }
+    .btn-search:focus ~ .input-search {
+      width: 200px;
+      border-radius: 0px;
+      background-color: $secondary-color;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom: 0.1px solid $very-light-grey;
+    }
+    .input-search:focus {
+      width: 300px;
+      border-radius: 0px;
+      background-color: $secondary-color;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom: 1px solid $color-alpha;
+    }
+  }
+}
