@@ -1,0 +1,36 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.popup {
+  background-color: black;
+}
+.add-task-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 80%;
+  @include section;
+
+  .close-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    @include add-close-btn;
+    width: 30px;
+    height: 30px;
+    background-color: $dark-grey;
+
+    .line {
+      color: $very-light-grey;
+      width: 15px;
+      height: 2px;
+      transform: translate(-50%, -50%) rotate(45deg);
+
+      &:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+}

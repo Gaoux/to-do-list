@@ -1,0 +1,30 @@
+@use '../abstracts/variables' as *;
+
+@mixin section {
+  background-color: $secondary-color;
+  border-radius: 20px;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+
+@mixin add-close-btn {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 50%;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+
+  .line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+    background: $white;
+    transform-origin: center;
+    transition: width 0.15s ease-in-out;
+  }
+}
