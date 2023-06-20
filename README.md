@@ -1,14 +1,35 @@
-# Repositorio base del Curso de Introducción a React.js en Platzi
+# To Do List in React.js
 
-¡Hola, Platzinauta!
+This repository contains a simple To Do List application built with React.js.
 
-En este repositorio encontrarás el código de todas las clases del [Curso de Introducción a React.js](https://platzi.com/reactjs). Para empezar solo debes clonar este repositorio (`git clone`), instalar sus dependencias (`npm i`) y ejecutar la aplicación (`npm start`).
+## Features
 
-La rama principal contiene el código con el que eempezamos el curso. En las demás ramas encontrarás el código de las siguientes clases y finalmente el deploy de la aplicación.
+- Add, edit, and delete tasks
+- Mark tasks as complete
+- Add, edit, and delete lists of tasks
+- Search for tasks
 
-¡Mucha suerte aprendiendo React! #NuncaParesDeAprender
+## Requirements
 
-## Getting Started with Create React App
+- Node.js 16+
+- NPM
+
+## Getting Started
+
+1. Clone the repository
+2. Install the dependencies
+
+```
+npm install
+```
+
+3. Start the application
+
+```
+npm start
+```
+
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -23,6 +44,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -73,3 +99,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## License
+
+This project is licensed under the MIT License.
