@@ -45,7 +45,8 @@ function AddTaskModal(props) {
         onHide={handleClose}
         keyboard={false}
         backdrop="static"
-        closeTimeoutMS={500}
+        animation={true}
+        // closeTimeoutMS={10000}
       >
         <Modal.Header className="add-task-modal__header">
           <Modal.Title>Add a task</Modal.Title>
