@@ -116,6 +116,10 @@
     }
   }
   .title {
+    position: fixed;
+    top: 38px;
+    left: 50%;
+    transform: translate(-50%, -50%);
     font-size: $lg;
   }
   .search-box {
@@ -164,7 +168,7 @@
       background-color: $secondary-color;
       pointer-events: painted;
     }
-    .btn-search:focus ~ .input-search {
+    .input-search.activeSearch {
       width: 350px;
       background-color: $secondary-color;
       border-top-left-radius: 20px;
