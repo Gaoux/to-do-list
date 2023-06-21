@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faS } from '@fortawesome/free-solid-svg-icons';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar(props) {
   return (
-    <div className="navbar">
+    <div className="navbar ">
       <div className="menuToggle">
         <input type="checkbox" />
         <span></span>

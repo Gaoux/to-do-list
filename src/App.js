@@ -3,7 +3,7 @@ import { Categories } from './components/Categories';
 import { TaskList } from './components/TaskList';
 import { TaskItem } from './components/TaskItem';
 import { AddTaskButton } from './components/AddTaskButton';
-import { AddTaskPopup } from './components/AddTaskPopup';
+import { AddTaskModal } from './components/AddTaskModal';
 import React from 'react';
 import { useState } from 'react';
 
@@ -41,10 +41,7 @@ function App() {
         active={activeAddTaskBtn}
         setActive={setActiveAddTaskBtn}
       />
-      <AddTaskPopup
-        trigger={activeAddTaskBtn}
-        setTrigger={setActiveAddTaskBtn}
-      ></AddTaskPopup>
+      <AddTaskModal show={activeAddTaskBtn} setShow={setActiveAddTaskBtn} />
     </React.Fragment>
   );
 }
