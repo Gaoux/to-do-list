@@ -16,6 +16,7 @@ function Navbar(props) {
   return (
     <div className="navbar">
       <div className="menuToggle">
+        <input type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
