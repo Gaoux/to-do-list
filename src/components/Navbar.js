@@ -9,7 +9,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar(props) {
   return (
-    <div className="navbar ">
+    <div className="navbar">
       <div className="menuToggle">
         <input type="checkbox" />
         <span></span>
@@ -38,7 +38,7 @@ function Navbar(props) {
           </li>
         </ul>
       </div>
-      <h2>props.pageTitle</h2>
+      <h2 className="title">{props.pageTitle} Home</h2>
       <div className="search-box">
         <button className="btn-search">
           <FontAwesomeIcon icon={faSearch} />
