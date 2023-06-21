@@ -1,145 +1,45 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
-.add-task-popup {
-  &__inner {
-    position: absolute;
-    bottom: 10%;
-    right: 0;
-    // transform: translate(-50%, -50%);
-    width: 50%;
-    height: 50%;
-    overflow: hidden;
-    @include section;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+
+.add-task-modal {
+  // border-radius: 20px;
+  &__header {
+    color: $white;
     background-color: $secondary-color;
-
-    .header {
-      width: 100%;
-      height: 15%;
-      background-color: $secondary-color;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 24px;
-
-      .title {
-        color: $white;
-        font-size: $md;
-        margin: 0;
-      }
-      .close-button {
-        width: 30px;
-        height: 30px;
-        margin: 0;
-        text-align: center;
-        .icon {
-          vertical-align: middle;
-          size: 2xl;
-          color: $white;
-        }
-      }
+  }
+  &__body {
+    background-color: $primary-color;
+    label {
+      color: $very-light-grey;
     }
-
-    .sector {
-      position: relative;
-      width: 100%;
-      height: 85%;
-      display: block;
-
-      .form-group {
-        position: relative;
-        display: block;
-        margin: 0;
-        padding: 0;
-        margin: 10px 0 10px 0;
-        label {
-          font-weight: 600;
-          font-size: 14px;
-          display: block;
-          color: $white;
-          cursor: pointer;
-          align-self: flex-start;
-        }
-        figure {
-          transform: scale(1.2);
-          &:hover {
-            transform: scale(1.3);
-          }
-        }
-        figure.favorite {
-          color: yellow;
-        }
-      }
-      .form-style {
-        padding: 13px 20px;
-        padding-left: 55px;
-        height: 48px;
-        width: 100%;
-        font-weight: 500;
-        border-radius: 4px;
-        font-size: $sm;
-        line-height: 22px;
-        letter-spacing: 0.5px;
-        outline: none;
-        color: $very-light-grey;
-        // background-color: $secondary-color;
-        // border: none;
-        background-color: $primary-color;
-        border: solid 1px $secondary-color;
-        -webkit-transition: all 200ms linear;
-        transition: all 200ms linear;
-        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
-      }
-      .form-style:focus,
-      .form-style:active {
-        border: solid 1px $secondary-color;
-        outline: none;
-        box-shadow: 0 4px 8px 0 rgba(21, 21, 21, 0.2);
-      }
-
-      .submit-btn {
-        position: absolute;
-        left: 50%;
-        bottom: 10px;
-        transform: translate(-50%, -50%);
-        margin: 0 auto;
-        border-radius: 4px;
-        height: 44px;
-        font-size: $sm;
-        font-weight: 600;
-        text-decoration: none;
-        text-transform: uppercase;
-        -webkit-transition: all 200ms linear;
-        transition: all 200ms linear;
-        padding: 0 30px;
-        letter-spacing: 1px;
-        display: -webkit-inline-flex;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        align-items: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        justify-content: center;
-        -ms-flex-pack: center;
-        text-align: center;
-        border: none;
-        background-color: $color-alpha;
-        color: $white;
-        box-shadow: 0 8px 24px 0 rgba(16, 39, 112, 0.2);
-        &:active,
-        &:focus,
-        &:hover {
-          background-color: $white;
-          color: $color-alpha;
-        }
-      }
+    input {
+      background-color: $dark-grey;
+      color: $white;
+      font-size: $md;
+      letter-spacing: 1.3px;
+      height: 45px;
     }
+    input#description {
+      font-size: $md;
+      align-items: flex-start;
+      justify-content: left;
+      height: 100px;
+    }
+    button:last-child {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      text-transform: uppercase;
+      background-color: $color-alpha;
+      color: $white;
+      transition: transform 0.2s;
+    }
+    button:last-child:hover {
+      background-color: $color-beta;
+      transform: scale(1.02);
+    }
+  }
+  &__footer {
+    background-color: $secondary-color;
   }
 }
