@@ -1,6 +1,22 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+.ReactModal__Overlay {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
 .add-task-modal {
   // border-radius: 20px;
   &__header {
@@ -12,19 +28,92 @@
     label {
       color: $very-light-grey;
     }
-    input {
+
+    .input {
       background-color: $dark-grey;
       color: $white;
-      font-size: $md;
+      font-size: $sm;
       letter-spacing: 1.3px;
       height: 45px;
     }
-    input#description {
-      font-size: $md;
-      align-items: flex-start;
-      justify-content: left;
+    .input#notes {
       height: 100px;
     }
+    .alert {
+      color: $light-red;
+    }
+
+    .expired-msg {
+      font-size: $sm;
+      margin-left: 20px;
+      padding: 0;
+      font-weight: 100;
+    }
+    // Place Holder CSS
+    ::-webkit-input-placeholder {
+      opacity: 0.5;
+      -webkit-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :-moz-placeholder {
+      opacity: 0.5;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    ::-moz-placeholder {
+      opacity: 0.5;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :-ms-input-placeholder {
+      opacity: 0.5;
+      -ms-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    /* Place Holder CSS for Focus */
+    :hover::-webkit-input-placeholder {
+      opacity: 0.75;
+      -webkit-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :hover:-moz-placeholder {
+      opacity: 0.75;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :hover::-moz-placeholder {
+      opacity: 0.75;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :hover:-ms-input-placeholder {
+      opacity: 0.75;
+      -ms-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+
+    /* Place Holder CSS for Focus */
+    :focus::-webkit-input-placeholder {
+      opacity: 0;
+      -webkit-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :focus:-moz-placeholder {
+      opacity: 0;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :focus::-moz-placeholder {
+      opacity: 0;
+      -moz-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+    :focus:-ms-input-placeholder {
+      opacity: 0;
+      -ms-transition: opacity 0.35s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
+    }
+
     button:last-child {
       position: absolute;
       bottom: 10px;
@@ -42,4 +131,8 @@
   &__footer {
     background-color: $secondary-color;
   }
+}
+
+.hide {
+  display: none;
 }
