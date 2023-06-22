@@ -63,7 +63,7 @@ function AddTaskModal(props) {
                 className="block text-gray-700 text-sm font-bold mb-2"
                 for="name"
               >
-                Name
+                Name *
               </label>
               <input
                 className="input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -85,11 +85,9 @@ function AddTaskModal(props) {
               </label>
 
               <input
-                className={
-                  dateExpired
-                    ? 'input alert shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                    : 'input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
-                }
+                className={`input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  dateExpired && 'alert'
+                }`}
                 // className="input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="duedate"
                 type="date"

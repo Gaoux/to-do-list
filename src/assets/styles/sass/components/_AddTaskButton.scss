@@ -9,7 +9,7 @@
   @include add-btn;
 }
 
-.add-task-btn.active {
+.add-task-btn--active {
   background-color: $ajax-red;
   transform: rotate(45deg);
 }

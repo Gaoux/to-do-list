@@ -8,7 +8,7 @@ function AddTaskButton(props) {
 
   return (
     <button
-      className={props.active ? 'add-task-btn active' : 'add-task-btn'}
+      className={`add-task-btn ${props.active && 'add-task-btn--active'}`}
       onClick={handleClick}
     >
       <span className="line"></span>

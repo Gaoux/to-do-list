@@ -15,10 +15,15 @@ import { ListsContainer } from './components/ListsContainer';
 //   { id: 4, text: 'End this proyect', completed: false },
 // ];
 const defaultTasks = [
-  { text: 'Cut hair', completed: false },
-  { text: 'Drink water', completed: true },
-  { text: 'Go to the gym', completed: false },
-  { text: 'End this proyect', completed: false },
+  {
+    text: 'Finish this React App',
+    completed: false,
+    date: '',
+    notes: 'End this To Do App',
+  },
+  { text: 'Cut hair', completed: false, date: '', notes: '' },
+  { text: 'Drink water', completed: true, date: '', notes: '' },
+  { text: 'Go to the gym', completed: false, date: '', notes: '' },
 ];
 
 function App() {
