@@ -1,0 +1,23 @@
+@use '../abstracts/variables' as *;
+
+.list-container {
+  margin-bottom: 50px;
+  color: $white;
+
+  .title {
+    font-size: $lg;
+  }
+  .list-list {
+    .list-item {
+      width: 250px;
+      background-color: $secondary-color;
+      margin: 0 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      cursor: pointer;
+      .n-tasks {
+        color: $dark-grey;
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
 import { Navbar } from './components/Navbar';
-import { Categories } from './components/Categories';
+
 import { TaskList } from './components/TaskList';
 import { TaskItem } from './components/TaskItem';
 import { AddTaskButton } from './components/AddTaskButton';
 import { AddTaskModal } from './components/AddTaskModal';
 import React from 'react';
 import { useState } from 'react';
+import { ListsContainer } from './components/ListsContainer';
 
 // const defaultTasks = [
 //   { id: 1, text: 'Cut hair', completed: false },
@@ -21,13 +22,12 @@ const defaultTasks = [
 ];
 
 function App() {
-  const [activeAddTaskBtn, setActiveAddTaskBtn] = useState(false);
+  const [activeAddTask, setActiveAddTask] = useState(false);
   return (
     //This is jsx code (es javascript + xml)
     <React.Fragment>
       <Navbar />
-      <h1>Your Tasks</h1>
-      <Categories completed={2} total={5} />
+      <ListsContainer />
       <TaskList>
         {defaultTasks.map((task) => (
           <TaskItem
@@ -37,11 +37,8 @@ function App() {
           />
         ))}
       </TaskList>
-      <AddTaskButton
-        active={activeAddTaskBtn}
-        setActive={setActiveAddTaskBtn}
-      />
-      <AddTaskModal show={activeAddTaskBtn} setShow={setActiveAddTaskBtn} />
+      <AddTaskButton active={activeAddTask} setActive={setActiveAddTask} />
+      <AddTaskModal show={activeAddTask} setShow={setActiveAddTask} />
     </React.Fragment>
   );
 }

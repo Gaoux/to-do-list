@@ -10,6 +10,7 @@
   //   border-bottom-left-radius: 20px;
   //   border-bottom-right-radius: 20px;
   margin-bottom: 24px;
+  color: $white;
 
   .menuToggle {
     display: flex;
@@ -144,7 +145,6 @@
       transition: all 0.4s ease-in-out;
       background: none;
       padding-right: 40px;
-      color: $white;
     }
     .input-search::placeholder {
       color: $very-light-grey;
@@ -164,7 +164,6 @@
       position: absolute;
       top: 0;
       right: 0px;
-      color: $white;
       background-color: $secondary-color;
       pointer-events: painted;
     }
