@@ -1,5 +1,5 @@
 import { Navbar } from './components/Navbar';
-import { Home } from './pages/home';
+import { Home } from './pages/Home';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
