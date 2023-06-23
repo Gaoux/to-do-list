@@ -10,8 +10,14 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar(props) {
   const [activeSearch, setActiveSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
   const handleSearchClick = () => {
     setActiveSearch(!activeSearch);
+  };
+
+  const hadleSearchChange = (e) => {
+    setActiveSearch(e.target.value);
   };
   return (
     <div className="navbar">
@@ -53,7 +59,9 @@ function Navbar(props) {
           className={
             activeSearch ? 'input-search activeSearch' : 'input-search'
           }
+          value={searchValue}
           placeholder="Search..."
+          onChange={hadleSearchChange}
         />
       </div>
     </div>
