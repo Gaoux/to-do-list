@@ -4,6 +4,7 @@ import { MyTasks } from './pages/MyTasks';
 import { MyLists } from './pages/MyLists';
 import { Important } from './pages/Important';
 import { MyAccount } from './pages/MyAccount';
+import { Search } from './pages/Search';
 import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 
@@ -61,6 +62,10 @@ function App() {
         <Route
           path="/account"
           element={<MyAccount tasks={tasks} setTasks={setTasks} />}
+        />
+        <Route
+          path="/search"
+          element={<Search tasks={tasks} setTasks={setTasks} />}
         />
       </Routes>
     </>

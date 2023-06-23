@@ -7,8 +7,11 @@ import { faList } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function Navbar(props) {
+  const navigate = useNavigate();
+
   const changeTitle = () => {
     switch (window.location.pathname) {
       case '/tasks':
@@ -23,16 +26,23 @@ function Navbar(props) {
       case '/account':
         return 'My account';
 
+      case '/search':
+        return 'Search';
+
       default:
         return 'Home';
     }
   };
 
-  let title = changeTitle();
-
   const handleSearchClick = () => {
+    if (!props.activeSearch) {
+      navigate('/search');
+    } else {
+      navigate(-1);
+    }
     props.setActiveSearch(!props.activeSearch);
   };
+  let title = changeTitle();
 
   const hadleSearchChange = (e) => {
     props.setSearchValue(e.target.value);
