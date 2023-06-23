@@ -168,7 +168,7 @@
       background-color: $secondary-color;
       pointer-events: painted;
     }
-    .input-search.activeSearch {
+    .input-search--active {
       pointer-events: auto;
       width: 350px;
       background-color: $secondary-color;

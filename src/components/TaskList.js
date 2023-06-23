@@ -13,6 +13,7 @@ function TaskList(props) {
       completedTasks.push(element);
     }
   });
+
   return (
     <div className="task-list-container">
       <h2 className="title m-4 lg">Tasks</h2>

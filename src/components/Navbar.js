@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -9,15 +9,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar(props) {
-  const [activeSearch, setActiveSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-
   const handleSearchClick = () => {
-    setActiveSearch(!activeSearch);
+    props.setActiveSearch(!props.activeSearch);
   };
 
   const hadleSearchChange = (e) => {
-    setActiveSearch(e.target.value);
+    props.setSearchValue(e.target.value);
   };
   return (
     <div className="navbar">
@@ -49,17 +46,17 @@ function Navbar(props) {
           </li>
         </ul>
       </div>
-      <h2 className="title">{props.pageTitle} Home</h2>
+      <h2 className="title">{props.title}</h2>
       <div className="search-box">
         <button className="btn-search" onClick={handleSearchClick}>
-          <FontAwesomeIcon icon={activeSearch ? faX : faSearch} />
+          <FontAwesomeIcon icon={props.activeSearch ? faX : faSearch} />
         </button>
         <input
           type="text"
-          className={
-            activeSearch ? 'input-search activeSearch' : 'input-search'
-          }
-          value={searchValue}
+          className={`input-search ${
+            props.activeSearch && 'input-search--active'
+          }`}
+          value={props.searchValue}
           placeholder="Search..."
           onChange={hadleSearchChange}
         />
