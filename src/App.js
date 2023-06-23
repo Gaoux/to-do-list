@@ -1,6 +1,10 @@
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { MyTasks } from './pages/MyTasks';
+import { MyLists } from './pages/MyLists';
+import { Important } from './pages/Important';
+import { MyAccount } from './pages/MyAccount';
+import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 
 // const defaultTasks = [
@@ -23,22 +27,8 @@ const defaultTasks = [
 ];
 
 function App() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const navigateHome = () => {
-    setCurrPage('Home');
-    navigate('/');
-  };
-  const navigateLists = () => {
-    setCurrPage('My Lists');
-    navigate('/');
-  };
-  const navigateTasks = () => {
-    setCurrPage('My Tasks');
-    navigate('/');
-  };
-
-  const [currPage, setCurrPage] = useState('Home');
   // const navigate = useNavigate();
   //Tasks
   const [tasks, setTasks] = useState(defaultTasks);
@@ -50,19 +40,28 @@ function App() {
     <>
       <Navbar
         activeSearch={activeSearch}
-        navigateHome={navigateHome}
-        navigateLists={navigateLists}
-        navigateTasks={navigateTasks}
         setActiveSearch={setActiveSearch}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
-        title={currPage}
       />
       <Routes>
+        <Route path="/" element={<Home tasks={tasks} setTasks={setTasks} />} />
         <Route
-          path="/"
-          element={<Home tasks={tasks} setTasks={setTasks} />}
-        ></Route>
+          path="/tasks"
+          element={<MyTasks tasks={tasks} setTasks={setTasks} />}
+        />
+        <Route
+          path="/important"
+          element={<Important tasks={tasks} setTasks={setTasks} />}
+        />
+        <Route
+          path="/lists"
+          element={<MyLists tasks={tasks} setTasks={setTasks} />}
+        />
+        <Route
+          path="/account"
+          element={<MyAccount tasks={tasks} setTasks={setTasks} />}
+        />
       </Routes>
     </>
   );

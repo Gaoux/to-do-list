@@ -9,6 +9,27 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 
 function Navbar(props) {
+  const changeTitle = () => {
+    switch (window.location.pathname) {
+      case '/tasks':
+        return 'My tasks';
+
+      case '/important':
+        return 'Important';
+
+      case '/lists':
+        return 'My lists';
+
+      case '/account':
+        return 'My account';
+
+      default:
+        return 'Home';
+    }
+  };
+
+  let title = changeTitle();
+
   const handleSearchClick = () => {
     props.setActiveSearch(!props.activeSearch);
   };
@@ -30,23 +51,23 @@ function Navbar(props) {
           </li>
           <li>
             <FontAwesomeIcon icon={faCheck} />
-            <a href="/">My tasks</a>
+            <a href="/tasks">My tasks</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faStar} />
-            <a href="/">Important</a>
+            <a href="/important">Important</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faList} />
-            <a href="/">My lists</a>
+            <a href="/lists">My lists</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faUser} />
-            <a href="/">My account</a>
+            <a href="/account">My account</a>
           </li>
         </ul>
       </div>
-      <h2 className="title">{props.title}</h2>
+      <h2 className="title">{title}</h2>
       <div className="search-box">
         <button className="btn-search" onClick={handleSearchClick}>
           <FontAwesomeIcon icon={props.activeSearch ? faX : faSearch} />
