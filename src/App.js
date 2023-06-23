@@ -14,6 +14,18 @@ import React, { useState } from 'react';
 //   { id: 3, text: 'Go to the gym', completed: false },
 //   { id: 4, text: 'End this proyect', completed: false },
 // ];
+const defaultLists = [
+  {
+    name: 'Work',
+    nTasks: 2,
+    nTaskkCompleted: 1,
+  },
+  {
+    name: 'House',
+    nTasks: 3,
+    nTaskkCompleted: 2,
+  },
+];
 const defaultTasks = [
   {
     text: 'Finish this React App',
@@ -28,9 +40,8 @@ const defaultTasks = [
 ];
 
 function App() {
-  // const navigate = useNavigate();
-
-  // const navigate = useNavigate();
+  //Lists
+  const [lists, setLists] = useState(defaultLists);
   //Tasks
   const [tasks, setTasks] = useState(defaultTasks);
   //Search
@@ -46,10 +57,20 @@ function App() {
         setSearchValue={setSearchValue}
       />
       <Routes>
-        <Route path="/" element={<Home tasks={tasks} setTasks={setTasks} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              list={lists}
+              setLists={setLists}
+              tasks={tasks}
+              setTasks={setTasks}
+            />
+          }
+        />
         <Route
           path="/tasks"
-          element={<MyTasks tasks={tasks} setTasks={setTasks} />}
+          element={<MyTasks list={lists} tasks={tasks} setTasks={setTasks} />}
         />
         <Route
           path="/important"

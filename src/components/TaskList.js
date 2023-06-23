@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 
 function TaskList(props) {
+  const [showCompleted, setShowCompleted] = useState('false');
   let uncompletedTasks = [];
   let completedTasks = [];
 
@@ -14,12 +17,25 @@ function TaskList(props) {
     }
   });
 
+  const handleCompletedClick = () => {
+    setShowCompleted(!showCompleted);
+  };
+
   return (
     <div className="task-list-container">
       <h2 className="title m-4 lg">Tasks</h2>
       {uncompletedTasks}
-      <h3 className="subtitle ml-4 mb-4 mt-4 lg">Completed</h3>
-      {completedTasks}
+      <div className="subtitle flex">
+        <FontAwesomeIcon
+          className="icon"
+          icon={showCompleted ? faAngleUp : faAngleDown}
+          onClick={handleCompletedClick}
+        />
+        <h3 className="ml-4 mb-4 mt-4 lg">
+          Completed ({completedTasks.length})
+        </h3>
+      </div>
+      {showCompleted ? null : completedTasks}
     </div>
   );
 }

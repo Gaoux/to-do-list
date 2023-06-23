@@ -7,7 +7,10 @@
   }
   .subtitle {
     font-size: $md;
-    margin-left: 60px;
+    margin-left: 40px;
+    .icon {
+      margin: auto 0;
+    }
   }
   .task-list {
     width: 100%;
