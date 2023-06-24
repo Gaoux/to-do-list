@@ -13,7 +13,6 @@ function AddListModal(props) {
         keyboard={false}
         backdrop="static"
         animation={true}
-        // closeTimeoutMS={10000}
       >
         <Modal.Header className="add-modal__header">
           <Modal.Title>Create a List</Modal.Title>
