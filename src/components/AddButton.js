@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AddTaskButton(props) {
+function AddButton(props) {
   const handleClick = () => {
     props.setActive(!props.active);
     //Add code here to show add a task Window
@@ -17,4 +17,4 @@ function AddTaskButton(props) {
   );
 }
 
-export { AddTaskButton };
+export { AddButton };

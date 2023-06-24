@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TaskList } from '../components/TaskList';
 import { TaskItem } from '../components/TaskItem';
-import { AddTaskButton } from '../components/AddTaskButton';
+import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
 
 function MyTasks({ tasks, setTasks }) {
@@ -21,7 +21,7 @@ function MyTasks({ tasks, setTasks }) {
           />
         ))}
       </TaskList>
-      <AddTaskButton active={activeAddTask} setActive={setActiveAddTask} />
+      <AddButton active={activeAddTask} setActive={setActiveAddTask} />
       <AddTaskModal
         tasks={tasks}
         setTasks={setTasks}
