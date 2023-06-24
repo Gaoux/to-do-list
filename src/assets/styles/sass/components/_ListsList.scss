@@ -10,8 +10,14 @@
 }
 
 .lists-container-lists-page {
-  .list-item {
-    height: 150px;
-    width: 450px;
+  .list-list {
+    div {
+      width: 100%;
+      .list-item {
+        align-self: center;
+        height: 150px;
+        width: 80%;
+      }
+    }
   }
 }
