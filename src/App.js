@@ -96,23 +96,23 @@ function App() {
           }
         />
         <Route
-          path="/tasks"
+          path="tasks"
           element={<MyTasks list={lists} tasks={tasks} setTasks={setTasks} />}
         />
         <Route
-          path="/important"
+          path="important"
           element={<Important tasks={tasks} setTasks={setTasks} />}
         />
         <Route
-          path="/lists"
+          path="lists"
           element={<MyLists tasks={tasks} setTasks={setTasks} />}
         />
         <Route
-          path="/account"
+          path="account"
           element={<MyAccount tasks={tasks} setTasks={setTasks} />}
         />
         <Route
-          path="/search"
+          path="search"
           element={
             <Search searchValue={searchValue} lists={lists} tasks={tasks} />
           }

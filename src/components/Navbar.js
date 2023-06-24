@@ -36,7 +36,7 @@ function Navbar(props) {
 
   const handleSearchClick = () => {
     if (!props.activeSearch) {
-      navigate('/search');
+      navigate('search');
     } else {
       navigate(-1);
     }
@@ -61,19 +61,19 @@ function Navbar(props) {
           </li>
           <li>
             <FontAwesomeIcon icon={faCheck} />
-            <a href="/tasks">My tasks</a>
+            <a href="tasks">My tasks</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faStar} />
-            <a href="/important">Important</a>
+            <a href="important">Important</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faList} />
-            <a href="/lists">My lists</a>
+            <a href="lists">My lists</a>
           </li>
           <li>
             <FontAwesomeIcon icon={faUser} />
-            <a href="/account">My account</a>
+            <a href="account">My account</a>
           </li>
         </ul>
       </div>
