@@ -26,17 +26,43 @@ const defaultLists = [
     nTaskkCompleted: 2,
   },
 ];
+
 const defaultTasks = [
   {
     text: 'Finish this React App',
     completed: false,
+    important: true,
     date: '',
     notes: 'End this To Do App',
   },
-  { text: 'Cut hair', completed: false, date: '', notes: '' },
-  { text: 'Drink water', completed: true, date: '', notes: '' },
-  { text: 'Go to the gym', completed: false, date: '', notes: '' },
-  { text: 'Prepare dinner', completed: true, date: '', notes: '' },
+  {
+    text: 'Cut hair with barber',
+    completed: false,
+    important: false,
+    date: '',
+    notes: '',
+  },
+  {
+    text: 'Drink water',
+    completed: true,
+    important: true,
+    date: '',
+    notes: '',
+  },
+  {
+    text: 'Go to the gym',
+    completed: false,
+    important: false,
+    date: '',
+    notes: '',
+  },
+  {
+    text: 'Prepare dinner',
+    completed: true,
+    important: false,
+    date: '',
+    notes: '',
+  },
 ];
 
 function App() {

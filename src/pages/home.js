@@ -19,6 +19,9 @@ function Home({ tasks, setTasks }) {
             key={task.text}
             text={task.text}
             completed={task.completed}
+            date={task.date}
+            important={task.important}
+            notes={task.notes}
           />
         ))}
       </TaskList>

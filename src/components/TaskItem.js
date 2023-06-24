@@ -3,6 +3,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 function TaskItem(props) {
+  const handleCompleteClick = () => {};
   return (
     <div className="task-list">
       <div className="task-item flex mb-4 items-center">
@@ -10,6 +11,7 @@ function TaskItem(props) {
           <FontAwesomeIcon
             className="icon"
             icon={props.completed ? faCircleCheck : faCircle}
+            onClick={handleCompleteClick}
           />
         </button>
         <p className={`w-full ${props.completed && 'line-through'}`}>
