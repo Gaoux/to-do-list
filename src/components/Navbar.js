@@ -8,12 +8,14 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Navbar(props) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const changeTitle = () => {
-    switch (window.location.pathname) {
+    switch (location.pathname) {
       case '/tasks':
         return 'My tasks';
 
@@ -36,7 +38,7 @@ function Navbar(props) {
 
   const handleSearchClick = () => {
     if (!props.activeSearch) {
-      navigate('search');
+      navigate('/search');
     } else {
       navigate(-1);
     }
@@ -57,23 +59,23 @@ function Navbar(props) {
         <ul className="menu">
           <li>
             <FontAwesomeIcon icon={faHouse} />
-            <a href="/">Home</a>
+            <button onClick={() => navigate('/')}>Home</button>
           </li>
           <li>
             <FontAwesomeIcon icon={faCheck} />
-            <a href="tasks">My tasks</a>
+            <button onClick={() => navigate('/tasks')}>My tasks</button>
           </li>
           <li>
             <FontAwesomeIcon icon={faStar} />
-            <a href="important">Important</a>
+            <button onClick={() => navigate('/important')}>Important</button>
           </li>
           <li>
             <FontAwesomeIcon icon={faList} />
-            <a href="lists">My lists</a>
+            <button onClick={() => navigate('/lists')}>My lists</button>
           </li>
           <li>
             <FontAwesomeIcon icon={faUser} />
-            <a href="account">My account</a>
+            <button onClick={() => navigate('/account')}>My account</button>
           </li>
         </ul>
       </div>
