@@ -18,12 +18,62 @@ const defaultLists = [
   {
     name: 'Work',
     nTasks: 2,
-    nTaskkCompleted: 1,
+    nTasksCompleted: 1,
+    tasks: [],
   },
   {
     name: 'House',
-    nTasks: 3,
-    nTaskkCompleted: 2,
+    nTasks: 5,
+    nTasksCompleted: 4,
+    tasks: [],
+  },
+  {
+    name: 'Whatever',
+    nTasks: 12,
+    nTasksCompleted: 12,
+    tasks: [],
+  },
+  {
+    name: 'House 2',
+    nTasks: 10,
+    nTasksCompleted: 2,
+    tasks: [],
+  },
+  {
+    name: 'Lala',
+    nTasks: 9,
+    nTasksCompleted: 4,
+    tasks: [],
+  },
+  {
+    name: 'Work',
+    nTasks: 2,
+    nTasksCompleted: 1,
+    tasks: [],
+  },
+  {
+    name: 'House',
+    nTasks: 5,
+    nTasksCompleted: 4,
+    tasks: [],
+  },
+  {
+    name: 'Whatever',
+    nTasks: 12,
+    nTasksCompleted: 12,
+    tasks: [],
+  },
+  {
+    name: 'House 2',
+    nTasks: 10,
+    nTasksCompleted: 2,
+    tasks: [],
+  },
+  {
+    name: 'Lala',
+    nTasks: 9,
+    nTasksCompleted: 4,
+    tasks: [],
   },
 ];
 
@@ -88,7 +138,7 @@ function App() {
           path="/"
           element={
             <Home
-              list={lists}
+              lists={lists}
               setLists={setLists}
               tasks={tasks}
               setTasks={setTasks}
@@ -105,7 +155,14 @@ function App() {
         />
         <Route
           path="/lists"
-          element={<MyLists tasks={tasks} setTasks={setTasks} />}
+          element={
+            <MyLists
+              lists={lists}
+              setLists={setLists}
+              tasks={tasks}
+              setTasks={setTasks}
+            />
+          }
         />
         <Route
           path="/account"

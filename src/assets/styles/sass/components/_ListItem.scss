@@ -1,0 +1,17 @@
+@use '../abstracts/variables' as *;
+
+.list-item {
+  width: 250px;
+  background-color: $secondary-color;
+  margin: 0 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: transform 0.2s;
+  cursor: pointer;
+  .n-tasks {
+    color: $dark-grey;
+  }
+}
+.list-item:hover {
+  background-color: $secondary-color-hover;
+}

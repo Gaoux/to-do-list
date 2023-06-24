@@ -3,15 +3,26 @@ import { TaskItem } from '../components/TaskItem';
 import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
 import { ListsContainer } from '../components/ListsContainer';
+import { ListItem } from '../components/ListItem';
 import React, { useState } from 'react';
 
-function Home({ tasks, setTasks }) {
+function Home({ tasks, setTasks, lists, setLists }) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
 
   return (
     <>
-      <ListsContainer />
+      <ListsContainer>
+        {lists.map((list) => (
+          <ListItem
+            key={list.name}
+            name={list.name}
+            nTasks={list.nTasks}
+            nTasksCompleted={list.nTasksCompleted}
+            description={list.description}
+          />
+        ))}
+      </ListsContainer>
       <TaskList>
         {tasks.map((task) => (
           <TaskItem
