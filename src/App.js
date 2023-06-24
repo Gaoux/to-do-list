@@ -35,6 +35,7 @@ const defaultTasks = [
     date: '',
     notes: 'End this To Do App',
   },
+
   {
     text: 'Cut hair with barber',
     completed: false,
@@ -112,7 +113,9 @@ function App() {
         />
         <Route
           path="/search"
-          element={<Search tasks={tasks} setTasks={setTasks} />}
+          element={
+            <Search searchValue={searchValue} lists={lists} tasks={tasks} />
+          }
         />
       </Routes>
     </>
