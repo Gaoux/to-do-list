@@ -40,7 +40,6 @@ function AddTaskModal(props) {
     <>
       <Modal
         className="add-task-modal"
-        isOpen={props.show}
         show={props.show}
         onHide={handleClose}
         keyboard={false}
@@ -61,7 +60,7 @@ function AddTaskModal(props) {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="name"
+                htmlFor="name"
               >
                 Name *
               </label>
@@ -76,7 +75,7 @@ function AddTaskModal(props) {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="duedate"
+                htmlFor="duedate"
               >
                 Due Date {selectedDate}
                 <span className={dateExpired ? 'expired-msg alert' : 'hide'}>
@@ -100,7 +99,7 @@ function AddTaskModal(props) {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="notes"
+                htmlFor="notes"
               >
                 Task notes
               </label>

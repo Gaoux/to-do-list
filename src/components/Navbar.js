@@ -15,6 +15,9 @@ function Navbar(props) {
   const location = useLocation();
 
   const changeTitle = () => {
+    if (location.pathname !== '/search') {
+      props.setActiveSearch(false);
+    }
     switch (location.pathname) {
       case '/tasks':
         return 'My tasks';
@@ -29,7 +32,7 @@ function Navbar(props) {
         return 'My account';
 
       case '/search':
-        return 'Search';
+        return 'Searching...';
 
       default:
         return 'Home';
