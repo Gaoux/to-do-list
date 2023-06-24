@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
+import { useNavigate } from 'react-router-dom';
 function TaskList(props) {
+  const navigate = useNavigate();
   const [showCompleted, setShowCompleted] = useState('false');
   let uncompletedTasks = [];
   let completedTasks = [];
@@ -23,7 +24,12 @@ function TaskList(props) {
 
   return (
     <div className="task-list-container">
-      <h2 className="title m-4 lg">Tasks</h2>
+      <h2
+        className="title m-4 lg cursor-pointer hover:opacity-50"
+        onClick={() => navigate('/tasks')}
+      >
+        Tasks
+      </h2>
       {uncompletedTasks}
       <div className="subtitle flex">
         <FontAwesomeIcon
