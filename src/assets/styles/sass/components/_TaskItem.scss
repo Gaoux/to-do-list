@@ -28,6 +28,7 @@
     }
   }
   .task-item:hover {
-    transform: scale(1.02);
+    background-color: $secondary-color-hover;
+    transform: scale(1.01);
   }
 }
