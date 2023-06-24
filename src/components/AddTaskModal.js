@@ -39,7 +39,7 @@ function AddTaskModal(props) {
   return (
     <>
       <Modal
-        className="add-task-modal"
+        className="add-modal"
         show={props.show}
         onHide={handleClose}
         keyboard={false}
@@ -47,7 +47,7 @@ function AddTaskModal(props) {
         animation={true}
         // closeTimeoutMS={10000}
       >
-        <Modal.Header className="add-task-modal__header">
+        <Modal.Header className="add-modal__header">
           <Modal.Title>Add a task</Modal.Title>
           <FontAwesomeIcon
             icon={faX}
@@ -55,7 +55,7 @@ function AddTaskModal(props) {
             style={{ cursor: 'pointer' }}
           />
         </Modal.Header>
-        <Modal.Body className="add-task-modal__body">
+        <Modal.Body className="add-modal__body">
           <form className=" rounded px-8 pt-6 pb-8 mb-4">
             <div className="mb-4">
               <label

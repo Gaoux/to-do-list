@@ -17,7 +17,7 @@
   transform: translateX(-100px);
 }
 
-.add-task-modal {
+.add-modal {
   // border-radius: 20px;
   &__header {
     color: $white;
@@ -37,6 +37,9 @@
       height: 45px;
     }
     .input#notes {
+      height: 100px;
+    }
+    .input#description {
       height: 100px;
     }
     .alert {
