@@ -27,8 +27,8 @@ function TaskList(props) {
       {uncompletedTasks}
       <div className="subtitle flex">
         <FontAwesomeIcon
-          className="icon"
-          icon={showCompleted ? faAngleUp : faAngleDown}
+          className={`icon ${showCompleted && 'icon--rotate'}`}
+          icon={faAngleDown}
           onClick={handleCompletedClick}
         />
         <h3 className="ml-4 mb-4 mt-4 lg">

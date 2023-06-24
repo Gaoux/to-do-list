@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 function ImportantTaskList(props) {
   const [showCompleted, setShowCompleted] = useState('false');
@@ -29,8 +29,8 @@ function ImportantTaskList(props) {
       {uncompletedTasks}
       <div className="subtitle flex">
         <FontAwesomeIcon
-          className="icon"
-          icon={showCompleted ? faAngleUp : faAngleDown}
+          className={`icon ${showCompleted && 'icon--rotate'}`}
+          icon={faAngleDown}
           onClick={handleCompletedClick}
         />
         <h3 className="ml-4 mb-4 mt-4 lg">

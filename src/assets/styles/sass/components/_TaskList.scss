@@ -11,6 +11,10 @@
     .icon {
       cursor: pointer;
       margin: auto 0;
+      transition: transform 0.1s;
+    }
+    .icon--rotate {
+      transform: rotate(-180deg);
     }
   }
 }
