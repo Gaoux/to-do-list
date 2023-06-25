@@ -71,7 +71,7 @@ function AddTaskModal(props) {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="repeat-section mb-4 flex flex-col">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="duedate"
@@ -99,12 +99,33 @@ function AddTaskModal(props) {
               >
                 Repeat *
               </label>
-              <select name="select repeat">
-                <option value="Only one time">Only one time</option>
-                <option value="Everyday">Everyday</option>
-                <option value="Every week">Every week</option>
-                <option value="Custom">Custom</option>
-              </select>
+              <div className="flex justify-left">
+                <div className="option my-2 ml-2 mr-10">
+                  <input
+                    className="cursor-pointer"
+                    type="radio"
+                    id="one-time"
+                    name="repeat"
+                    defaultChecked
+                    value="one time"
+                  />
+                  <label className="ml-2 cursor-pointer" htmlFor="one-time">
+                    One Time
+                  </label>
+                </div>
+                <div className="option my-2 mr-6">
+                  <input
+                    className="cursor-pointer"
+                    type="radio"
+                    id="everyday"
+                    name="repeat"
+                    value="eveyday"
+                  />
+                  <label className="ml-2 cursor-pointer" htmlFor="everyday">
+                    Everyday
+                  </label>
+                </div>
+              </div>
             </div>
             <div className="mb-4">
               <label

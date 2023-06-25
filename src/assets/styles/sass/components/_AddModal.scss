@@ -15,17 +15,15 @@
       color: $very-light-grey;
     }
 
-    .input {
+    .input,
+    .select {
       background-color: $dark-grey;
       color: $white;
       font-size: $sm;
       letter-spacing: 1.3px;
       height: 45px;
     }
-    .select {
-      background-color: $dark-grey;
-      color: $white;
-    }
+
     .input#notes {
       height: 100px;
     }

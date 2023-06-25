@@ -59,6 +59,7 @@ const defaultTasks = [
     completed: false,
     important: true,
     date: '',
+    repeat: 'everyday',
     notes: 'End this To Do App',
   },
 
