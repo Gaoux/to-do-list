@@ -16,7 +16,7 @@ function Search({ searchValue, tasks, lists, tasksLenght, listsLenght }) {
         <div className="fixed h-full w-full flex flex-col justify-center items-center">
           <SearchIcon />
           <h2 className="subtitle">
-            We couldn't fing what you're looking for.
+            We couldn't find what you're looking for.
           </h2>
         </div>
       ) : null}
