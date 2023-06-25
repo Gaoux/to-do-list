@@ -9,7 +9,7 @@ function ListsContainer(props) {
         className="title m-4 lg cursor-pointer hover:opacity-50"
         onClick={() => navigate('/lists')}
       >
-        Lists
+        Lists ({props.children.length})
       </h2>
       <div className="list-list flex overflow-x-auto">
         <div className="flex align-center justify-center flex-nowrap">

@@ -8,12 +8,6 @@ import { Search } from './pages/Search';
 import { Routes, Route } from 'react-router-dom';
 import React, { useState } from 'react';
 
-// const defaultTasks = [
-//   { id: 1, text: 'Cut hair', completed: false },
-//   { id: 2, text: 'Drink water', completed: true },
-//   { id: 3, text: 'Go to the gym', completed: false },
-//   { id: 4, text: 'End this proyect', completed: false },
-// ];
 const defaultLists = [
   {
     name: 'Work',
@@ -104,6 +98,13 @@ function App() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
+  const searchTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchValue.toLowerCase())
+  );
+  const searchLists = lists.filter((list) =>
+    list.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   return (
     <>
       <Navbar
@@ -150,7 +151,13 @@ function App() {
         <Route
           path="/search"
           element={
-            <Search searchValue={searchValue} lists={lists} tasks={tasks} />
+            <Search
+              searchValue={searchValue}
+              lists={searchLists}
+              tasks={searchTasks}
+              listsLenght={searchLists.length}
+              tasksLenght={searchTasks.length}
+            />
           }
         />
       </Routes>

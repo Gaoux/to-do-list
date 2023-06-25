@@ -24,7 +24,7 @@ function TaskList(props) {
         className="title m-4 lg cursor-pointer hover:opacity-50"
         onClick={() => navigate('/tasks')}
       >
-        Tasks
+        Tasks ({props.children.length})
       </h2>
       {uncompletedTasks}
       <CompletedTasks

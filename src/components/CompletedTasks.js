@@ -6,9 +6,10 @@ function CompletedTasks(props) {
     props.setShow(!props.show);
   };
 
+  const emptyChildren = props.nTasks === 0;
   return (
     <>
-      <div className="subtitle flex">
+      <div className={`subtitle flex ${emptyChildren && 'hidden'}`}>
         <FontAwesomeIcon
           className={`icon ${props.show && 'icon--rotate'}`}
           icon={faAngleDown}

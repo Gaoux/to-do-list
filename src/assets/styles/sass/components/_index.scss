@@ -1,8 +1,9 @@
-@forward '../components/AddTaskButton';
+@forward './AddTaskButton';
 @forward '../components/AddModal';
-@forward '../components/ListsList';
-@forward '../components/ListItem';
-@forward '../components/TaskCounter';
-@forward '../components/TaskItem';
-@forward '../components/TaskList';
-@forward '../components/TaskSearchBar';
+@forward './ListsList';
+@forward './ListItem';
+@forward './TaskCounter';
+@forward './TaskItem';
+@forward './TaskList';
+@forward './TaskSearchBar';
+@forward './SearchIcon';
