@@ -11,12 +11,13 @@ function AddTaskModal(props) {
 
   const handleDateChange = (e) => {
     //Current Date
-    var curr = new Date();
-    console.log(curr.toString());
+    var currDate = new Date();
+    currDate.setDate(currDate.getDate());
     //Date selected on input
     var dateSelected = new Date(e.target.value);
+    dateSelected.setDate(dateSelected.getDate() + 1);
     //Calculate Difference in days from the selected date and the actual date
-    var Difference_In_Time = dateSelected.getTime() - new Date().getTime();
+    var Difference_In_Time = dateSelected.getTime() - currDate.getTime();
     var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
     Difference_In_Days = Math.round(Difference_In_Days);
 
