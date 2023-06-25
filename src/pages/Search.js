@@ -15,16 +15,14 @@ function Search({ searchValue, tasks, lists, tasksLenght, listsLenght }) {
       {emptyLists && emptyTasks && !emptySearchValue ? (
         <div className="fixed h-full w-full flex flex-col justify-center items-center">
           <SearchIcon />
-          <h2 className="subtitle">
-            We couldn't find what you're looking for.
-          </h2>
+          <h2 className="title">We couldn't find what you're looking for.</h2>
         </div>
       ) : null}
 
       {emptySearchValue ? (
         <div className="fixed h-full w-full flex flex-col justify-center items-center">
           <SearchIcon />
-          <h2 className=" subtitle">What would you like to find?</h2>
+          <h2 className="title">What would you like to find?</h2>
         </div>
       ) : null}
 
