@@ -5,16 +5,14 @@ import { useState } from 'react';
 
 function AddTaskModal(props) {
   const [dateExpired, setDateExpired] = useState(false);
-  const [selectedDate, setSelectedDate] = useState('(Today)');
+  const [selectedDate, setSelectedDate] = useState('');
   const handleClose = () => props.setShow(false);
   // const handleShow = () => props.setShow(true);
 
-  //Curent date
-  var curr = new Date();
-  curr.setDate(curr.getDate() + 3);
-  var date = curr.toISOString().substring(0, 10);
-
   const handleDateChange = (e) => {
+    //Current Date
+    var curr = new Date();
+    console.log(curr.toString());
     //Date selected on input
     var dateSelected = new Date(e.target.value);
     //Calculate Difference in days from the selected date and the actual date
@@ -90,12 +88,23 @@ function AddTaskModal(props) {
                 // className="input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="duedate"
                 type="date"
-                defaultValue={date}
-                placeholder="Task name"
                 onChange={handleDateChange}
               />
             </div>
-
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="repeat"
+              >
+                Repeat *
+              </label>
+              <select name="select repeat">
+                <option value="Only one time">Only one time</option>
+                <option value="Everyday">Everyday</option>
+                <option value="Every week">Every week</option>
+                <option value="Custom">Custom</option>
+              </select>
+            </div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"

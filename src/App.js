@@ -46,33 +46,9 @@ const defaultLists = [
     tasks: [],
   },
   {
-    name: 'Work',
+    name: 'Work 2',
     nTasks: 2,
     nTasksCompleted: 1,
-    tasks: [],
-  },
-  {
-    name: 'House',
-    nTasks: 5,
-    nTasksCompleted: 4,
-    tasks: [],
-  },
-  {
-    name: 'Whatever',
-    nTasks: 12,
-    nTasksCompleted: 12,
-    tasks: [],
-  },
-  {
-    name: 'House 2',
-    nTasks: 10,
-    nTasksCompleted: 2,
-    tasks: [],
-  },
-  {
-    name: 'Lala',
-    nTasks: 9,
-    nTasksCompleted: 4,
     tasks: [],
   },
 ];

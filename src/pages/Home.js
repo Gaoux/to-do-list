@@ -1,4 +1,4 @@
-import { TaskList } from '../components/TaskList';
+import { DailyTasks } from '../components/DailyTasks';
 import { TaskItem } from '../components/TaskItem';
 import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
@@ -23,7 +23,7 @@ function Home({ tasks, setTasks, lists, setLists }) {
           />
         ))}
       </ListsContainer>
-      <TaskList>
+      <DailyTasks>
         {tasks.map((task) => (
           <TaskItem
             key={task.text}
@@ -34,7 +34,7 @@ function Home({ tasks, setTasks, lists, setLists }) {
             notes={task.notes}
           />
         ))}
-      </TaskList>
+      </DailyTasks>
       <AddButton active={activeAddTask} setActive={setActiveAddTask} />
       <AddTaskModal
         tasks={tasks}

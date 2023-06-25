@@ -22,9 +22,14 @@
       letter-spacing: 1.3px;
       height: 45px;
     }
+    .select {
+      background-color: $dark-grey;
+      color: $white;
+    }
     .input#notes {
       height: 100px;
     }
+    //Only for add list modal
     .input#description {
       height: 100px;
     }
