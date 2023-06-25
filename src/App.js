@@ -98,12 +98,16 @@ function App() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const searchTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(searchValue.toLowerCase())
-  );
-  const searchLists = lists.filter((list) =>
-    list.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  const searchTasks = tasks.filter((task) => {
+    const taskText = task.text.toLowerCase();
+    const search = searchValue.toLowerCase();
+    return taskText.includes(search);
+  });
+  const searchLists = lists.filter((list) => {
+    const listName = list.name.toLowerCase();
+    const search = searchValue.toLowerCase();
+    return listName.includes(search);
+  });
 
   return (
     <>
