@@ -18,10 +18,6 @@ function TaskList(props) {
     }
   });
 
-  const handleCompletedClick = () => {
-    setShowCompleted(!showCompleted);
-  };
-
   return (
     <div className="task-list-container">
       <h2

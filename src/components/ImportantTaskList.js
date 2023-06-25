@@ -19,10 +19,6 @@ function ImportantTaskList(props) {
     }
   });
 
-  const handleCompletedClick = () => {
-    setShowCompleted(!showCompleted);
-  };
-
   return (
     <div className="task-list-container">
       <h2 className="title m-4 lg">Important tasks</h2>
