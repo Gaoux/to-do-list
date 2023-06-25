@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { CompletedTasks } from './CompletedTasks';
+import { TaskItem } from './TaskItem';
 
 function ImportantTaskList(props) {
   const [showCompleted, setShowCompleted] = useState('false');
@@ -27,17 +27,23 @@ function ImportantTaskList(props) {
     <div className="task-list-container">
       <h2 className="title m-4 lg">Important tasks</h2>
       {uncompletedTasks}
-      <div className="subtitle flex">
-        <FontAwesomeIcon
-          className={`icon ${showCompleted && 'icon--rotate'}`}
-          icon={faAngleDown}
-          onClick={handleCompletedClick}
-        />
-        <h3 className="ml-4 mb-4 mt-4 lg">
-          Completed ({completedTasks.length})
-        </h3>
-      </div>
-      {showCompleted ? null : completedTasks}
+      <CompletedTasks
+        show={showCompleted}
+        setShow={setShowCompleted}
+        nTasks={completedTasks.length}
+      >
+        {completedTasks.map((task) => (
+          <TaskItem
+            key={task.props.text}
+            text={task.props.text}
+            completed={task.props.text}
+            repeat={task.props.text}
+            date={task.props.text}
+            important={task.props.text}
+            notes={task.props.text}
+          />
+        ))}
+      </CompletedTasks>
     </div>
   );
 }

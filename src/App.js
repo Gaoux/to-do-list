@@ -67,7 +67,7 @@ const defaultTasks = [
     text: 'Cut hair with barber',
     completed: false,
     important: false,
-    date: '',
+    date: new Date(),
     notes: '',
   },
   {
@@ -82,6 +82,7 @@ const defaultTasks = [
     completed: false,
     important: false,
     date: '',
+    repeat: 'everyday',
     notes: '',
   },
   {
@@ -89,6 +90,7 @@ const defaultTasks = [
     completed: true,
     important: false,
     date: '',
+    repeat: 'everyday',
     notes: '',
   },
 ];

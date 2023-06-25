@@ -15,6 +15,7 @@ function MyTasks({ tasks, setTasks }) {
             key={task.text}
             text={task.text}
             completed={task.completed}
+            repeat={task.repeat}
             date={task.date}
             important={task.important}
             notes={task.notes}

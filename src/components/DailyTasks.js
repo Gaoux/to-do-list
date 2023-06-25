@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { CompletedTasks } from './CompletedTasks';
 import { useNavigate } from 'react-router-dom';
+import { TaskItem } from './TaskItem';
 
 function DailyTasks(props) {
   const navigate = useNavigate();
@@ -13,16 +13,15 @@ function DailyTasks(props) {
     if (!React.isValidElement(element)) return;
     const source = element.props;
 
-    if (source.completed === false) {
-      uncompletedTasks.push(element);
-    } else {
-      completedTasks.push(element);
+    if (source.repeat !== 'everyday' && !source.date) return;
+    else if (
+      source.repeat === 'everyday' ||
+      source.date.toDateString() === new Date().toDateString()
+    ) {
+      if (source.completed === false) uncompletedTasks.push(element);
+      else completedTasks.push(element);
     }
   });
-
-  const handleCompletedClick = () => {
-    setShowCompleted(!showCompleted);
-  };
 
   return (
     <div className="task-list-container">
@@ -30,20 +29,26 @@ function DailyTasks(props) {
         className="title m-4 lg cursor-pointer hover:opacity-50"
         onClick={() => navigate('/tasks')}
       >
-        Tasks
+        Today's tasks
       </h2>
       {uncompletedTasks}
-      <div className="subtitle flex">
-        <FontAwesomeIcon
-          className={`icon ${showCompleted && 'icon--rotate'}`}
-          icon={faAngleDown}
-          onClick={handleCompletedClick}
-        />
-        <h3 className="ml-4 mb-4 mt-4 lg">
-          Completed ({completedTasks.length})
-        </h3>
-      </div>
-      {showCompleted ? null : completedTasks}
+      <CompletedTasks
+        show={showCompleted}
+        setShow={setShowCompleted}
+        nTasks={completedTasks.length}
+      >
+        {completedTasks.map((task) => (
+          <TaskItem
+            key={task.props.text}
+            text={task.props.text}
+            completed={task.props.text}
+            repeat={task.props.text}
+            date={task.props.text}
+            important={task.props.text}
+            notes={task.props.text}
+          />
+        ))}
+      </CompletedTasks>
     </div>
   );
 }
