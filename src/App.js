@@ -5,7 +5,7 @@ import { MyLists } from './pages/MyLists';
 import { Important } from './pages/Important';
 import { MyAccount } from './pages/MyAccount';
 import { Search } from './pages/Search';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 
 const defaultLists = [
@@ -49,66 +49,105 @@ const defaultLists = [
 
 const defaultTasks = [
   {
-    text: 'Finish this React App',
+    name: 'Finish this React App',
     completed: false,
     important: true,
     date: '',
     repeat: 'everyday',
     notes: 'End this To Do App',
+    listName: '',
   },
 
   {
-    text: 'Cut hair with barber',
+    name: 'Cut hair with barber',
     completed: false,
     important: false,
     date: new Date(),
     notes: '',
+    listName: '',
   },
   {
-    text: 'Drink water',
+    name: 'Drink water',
     completed: true,
     important: true,
     date: '',
     notes: '',
+    listName: '',
   },
   {
-    text: 'Go to the gym',
+    name: 'Go to the gym',
     completed: false,
     important: false,
     date: '',
     repeat: 'everyday',
     notes: '',
+    listName: '',
   },
   {
-    text: 'Prepare dinner',
+    name: 'Prepare dinner',
     completed: true,
     important: false,
     date: '',
     repeat: 'everyday',
     notes: '',
+    listName: '',
   },
 ];
 
 function App() {
+  const location = useLocation();
   //Lists
   const [lists, setLists] = useState(defaultLists);
   //Tasks
   const [tasks, setTasks] = useState(defaultTasks);
+
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
+  //Search lists
   const searchTasks = tasks.filter((task) => {
-    const taskText = task.text.toLowerCase();
+    const taskName = task.name.toLowerCase();
     const search = searchValue.toLowerCase();
-    return taskText.includes(search);
+    return taskName.includes(search);
   });
   const searchLists = lists.filter((list) => {
     const listName = list.name.toLowerCase();
     const search = searchValue.toLowerCase();
     return listName.includes(search);
   });
+  //Complete or uncomplete tasks
+  const completeTask = (name) => {
+    const newTasks = [...tasks];
+    const index = newTasks.findIndex((task) => task.name === name);
+    newTasks[index].completed = !newTasks[index].completed;
+    setTasks(newTasks);
+  };
 
+  //Navbar Title
+  const changeTitle = () => {
+    switch (location.pathname) {
+      case '/tasks':
+        return 'My tasks';
+
+      case '/important':
+        return 'Important';
+
+      case '/lists':
+        return 'My lists';
+
+      case '/account':
+        return 'My account';
+
+      case '/search':
+        return 'Searching...';
+
+      default:
+        return 'Home';
+    }
+  };
+  const pageTitle = changeTitle();
+  //
   return (
     <>
       <Navbar
@@ -116,6 +155,7 @@ function App() {
         setActiveSearch={setActiveSearch}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        title={pageTitle}
       />
       <Routes>
         <Route
@@ -126,12 +166,20 @@ function App() {
               setLists={setLists}
               tasks={tasks}
               setTasks={setTasks}
+              onCompleteClick={completeTask}
             />
           }
         />
         <Route
           path="/tasks"
-          element={<MyTasks list={lists} tasks={tasks} setTasks={setTasks} />}
+          element={
+            <MyTasks
+              list={lists}
+              tasks={tasks}
+              setTasks={setTasks}
+              onCompleteClick={completeTask}
+            />
+          }
         />
         <Route
           path="/important"
@@ -161,6 +209,7 @@ function App() {
               tasks={searchTasks}
               listsLenght={searchLists.length}
               tasksLenght={searchTasks.length}
+              onCompleteClick={completeTask}
             />
           }
         />

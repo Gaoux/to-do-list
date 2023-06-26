@@ -30,13 +30,13 @@ function ImportantTaskList(props) {
       >
         {completedTasks.map((task) => (
           <TaskItem
-            key={task.props.text}
-            text={task.props.text}
-            completed={task.props.text}
-            repeat={task.props.text}
-            date={task.props.text}
-            important={task.props.text}
-            notes={task.props.text}
+            key={task.props.name}
+            name={task.props.name}
+            completed={task.props.completed}
+            repeat={task.props.repeat}
+            date={task.props.date}
+            important={task.props.important}
+            notes={task.props.notes}
           />
         ))}
       </CompletedTasks>

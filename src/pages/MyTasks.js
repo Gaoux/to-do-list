@@ -4,21 +4,22 @@ import { TaskItem } from '../components/TaskItem';
 import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
 
-function MyTasks({ tasks, setTasks }) {
+function MyTasks({ tasks, setTasks, onCompleteClick }) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
   return (
     <>
-      <TaskList>
+      <TaskList onCompleteClick={onCompleteClick}>
         {tasks.map((task) => (
           <TaskItem
-            key={task.text}
-            text={task.text}
+            key={task.name}
+            name={task.name}
             completed={task.completed}
             repeat={task.repeat}
             date={task.date}
             important={task.important}
             notes={task.notes}
+            onCompleteClick={() => onCompleteClick(task.name)}
           />
         ))}
       </TaskList>

@@ -6,7 +6,7 @@ import { ListsContainer } from '../components/ListsContainer';
 import { ListItem } from '../components/ListItem';
 import React, { useState } from 'react';
 
-function Home({ tasks, setTasks, lists, setLists }) {
+function Home({ tasks, setTasks, lists, setLists, onCompleteClick }) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
 
@@ -23,16 +23,17 @@ function Home({ tasks, setTasks, lists, setLists }) {
           />
         ))}
       </ListsContainer>
-      <DailyTasks>
+      <DailyTasks onCompleteClick={onCompleteClick}>
         {tasks.map((task) => (
           <TaskItem
-            key={task.text}
-            text={task.text}
+            key={task.name}
+            name={task.name}
             completed={task.completed}
             repeat={task.repeat}
             date={task.date}
             important={task.important}
             notes={task.notes}
+            onCompleteClick={() => onCompleteClick(task.name)}
           />
         ))}
       </DailyTasks>

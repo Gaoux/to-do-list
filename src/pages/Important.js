@@ -7,8 +7,8 @@ function Important({ tasks, setTasks }) {
     <ImportantTaskList>
       {tasks.map((task) => (
         <TaskItem
-          key={task.text}
-          text={task.text}
+          key={task.name}
+          name={task.name}
           completed={task.completed}
           date={task.date}
           important={task.important}

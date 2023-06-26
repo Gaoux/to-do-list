@@ -5,7 +5,14 @@ import { ListsContainer } from '../components/ListsContainer';
 import { ListItem } from '../components/ListItem';
 import SearchIcon from '../components/SearchIcon';
 
-function Search({ searchValue, tasks, lists, tasksLenght, listsLenght }) {
+function Search({
+  searchValue,
+  tasks,
+  lists,
+  tasksLenght,
+  listsLenght,
+  onCompleteClick,
+}) {
   const emptyTasks = tasksLenght === 0;
   const emptyLists = listsLenght === 0;
   const emptySearchValue = searchValue === '';
@@ -43,13 +50,14 @@ function Search({ searchValue, tasks, lists, tasksLenght, listsLenght }) {
         <TaskList>
           {tasks.map((task) => (
             <TaskItem
-              key={task.text}
-              text={task.text}
+              key={task.name}
+              name={task.name}
               completed={task.completed}
               repeat={task.repeat}
               date={task.date}
               important={task.important}
               notes={task.notes}
+              onCompleteClick={() => onCompleteClick(task.name)}
             />
           ))}
         </TaskList>
