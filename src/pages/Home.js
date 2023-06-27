@@ -6,7 +6,13 @@ import { ListsContainer } from '../components/ListsContainer';
 import { ListItem } from '../components/ListItem';
 import React, { useState } from 'react';
 
-function Home({ tasks, lists, onCompleteClick, changeObjSelected }) {
+function Home({
+  tasks,
+  lists,
+  onCompleteClick,
+  onImportantClick,
+  changeObjSelected,
+}) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
 
@@ -38,6 +44,7 @@ function Home({ tasks, lists, onCompleteClick, changeObjSelected }) {
             important={task.important}
             notes={task.notes}
             onCompleteClick={() => onCompleteClick(task.name)}
+            onImportantClick={() => onImportantClick(task.name)}
             openInfo={() => changeObjSelected(task.name, 'task')}
           />
         ))}

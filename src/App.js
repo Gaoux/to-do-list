@@ -129,6 +129,13 @@ function App() {
     newTasks[index].completed = !newTasks[index].completed;
     setTasks(newTasks);
   };
+  //Make tasks Important or not
+  const makeImportantTask = (name) => {
+    const newTasks = [...tasks];
+    const index = newTasks.findIndex((task) => task.name === name);
+    newTasks[index].important = !newTasks[index].important;
+    setTasks(newTasks);
+  };
   //Edit task
   const editTask = (editedTask) => {
     const newTasks = [...tasks];
@@ -201,6 +208,7 @@ function App() {
               setLists={setLists}
               tasks={tasks}
               onCompleteClick={completeTask}
+              onImportantClick={makeImportantTask}
               changeObjSelected={changeObjSelected}
             />
           }
@@ -212,6 +220,7 @@ function App() {
               list={lists}
               tasks={tasks}
               onCompleteClick={completeTask}
+              onImportantClick={makeImportantTask}
               changeObjSelected={changeObjSelected}
             />
           }
@@ -223,6 +232,7 @@ function App() {
               tasks={tasks}
               setTasks={setTasks}
               onCompleteClick={completeTask}
+              onImportantClick={makeImportantTask}
               changeObjSelected={changeObjSelected}
             />
           }
@@ -252,6 +262,7 @@ function App() {
               listsLenght={searchLists.length}
               tasksLenght={searchTasks.length}
               onCompleteClick={completeTask}
+              onImportantClick={makeImportantTask}
               changeObjSelected={changeObjSelected}
             />
           }

@@ -4,7 +4,13 @@ import { TaskItem } from '../components/TaskItem';
 import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
 
-function MyTasks({ tasks, setTasks, onCompleteClick, changeObjSelected }) {
+function MyTasks({
+  tasks,
+  setTasks,
+  onCompleteClick,
+  onImportantClick,
+  changeObjSelected,
+}) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
   return (
@@ -23,6 +29,7 @@ function MyTasks({ tasks, setTasks, onCompleteClick, changeObjSelected }) {
             important={task.important}
             notes={task.notes}
             onCompleteClick={() => onCompleteClick(task.name)}
+            onImportantClick={() => onImportantClick(task.name)}
             openInfo={() => changeObjSelected(task.name, 'task')}
           />
         ))}

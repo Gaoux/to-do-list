@@ -12,6 +12,7 @@ function Search({
   tasksLenght,
   listsLenght,
   onCompleteClick,
+  onImportantClick,
   changeObjSelected,
 }) {
   const emptyTasks = tasksLenght === 0;
@@ -62,6 +63,7 @@ function Search({
               important={task.important}
               notes={task.notes}
               onCompleteClick={() => onCompleteClick(task.name)}
+              onImportantClick={() => onImportantClick(task.name)}
               openInfo={() => changeObjSelected(task.name, 'task')}
             />
           ))}

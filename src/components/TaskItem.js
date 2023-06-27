@@ -5,6 +5,15 @@ import { faStar } from '@fortawesome/free-regular-svg-icons';
 import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 
 function TaskItem(props) {
+  const handleCompleteClick = (e) => {
+    e.stopPropagation();
+    props.onCompleteClick();
+  };
+  const handleStarClick = (e) => {
+    e.stopPropagation();
+    props.onImportantClick();
+  };
+
   return (
     <div className="task-list">
       <div
@@ -12,7 +21,7 @@ function TaskItem(props) {
         onClick={props.openInfo}
       >
         <button
-          onClick={props.onCompleteClick}
+          onClick={handleCompleteClick}
           className="flex-no-shrink p-2 ml-4 mr-2 rounded "
         >
           <FontAwesomeIcon
@@ -30,7 +39,7 @@ function TaskItem(props) {
         <FontAwesomeIcon
           className={`star icon mr-3 ${props.important && 'star--checked'}`}
           icon={props.important ? faSolidStar : faStar}
-          // onClick={handleStarClick}
+          onClick={handleStarClick}
         />
       </div>
     </div>

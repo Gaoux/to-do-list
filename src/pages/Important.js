@@ -2,7 +2,12 @@ import React from 'react';
 import { ImportantTaskList } from '../components/ImportantTaskList';
 import { TaskItem } from '../components/TaskItem';
 
-function Important({ tasks, onCompleteClick, changeObjSelected }) {
+function Important({
+  tasks,
+  onCompleteClick,
+  onImportantClick,
+  changeObjSelected,
+}) {
   return (
     <ImportantTaskList
       onCompleteClick={onCompleteClick}
@@ -18,6 +23,7 @@ function Important({ tasks, onCompleteClick, changeObjSelected }) {
           important={task.important}
           notes={task.notes}
           onCompleteClick={() => onCompleteClick(task.name)}
+          onImportantClick={() => onImportantClick(task.name)}
           openInfo={() => changeObjSelected(task.name, 'task')}
         />
       ))}
