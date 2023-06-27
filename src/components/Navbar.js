@@ -4,7 +4,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faList } from '@fortawesome/free-solid-svg-icons';
-// import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -51,10 +51,28 @@ function Navbar(props) {
               <FontAwesomeIcon icon={faList} />
               <button onClick={() => navigate('/lists')}>My lists</button>
             </li>
-            {/* <li className="account">
+
+            <li className="account">
               <FontAwesomeIcon icon={faUser} />
-              <button onClick={() => navigate('/account')}>My account</button>
-            </li> */}
+              <button>Gustavo Parra</button>
+            </li>
+            <div className="footer">
+              <a href="https://github.com/Gaoux">
+                <img
+                  src="https://seeklogo.com/images/G/github-logo-5F384D0265-seeklogo.com.png"
+                  alt="GitHub Logo"
+                  className="footer-icon github"
+                ></img>
+              </a>
+
+              <a href="/">
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                  alt="LinkedIn Logo"
+                  className="footer-icon"
+                />
+              </a>
+            </div>
           </ul>
         </div>
       )}
