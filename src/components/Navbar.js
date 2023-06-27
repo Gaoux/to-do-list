@@ -51,10 +51,10 @@ function Navbar(props) {
               <FontAwesomeIcon icon={faList} />
               <button onClick={() => navigate('/lists')}>My lists</button>
             </li>
-            <li>
+            {/* <li className="account">
               <FontAwesomeIcon icon={faUser} />
               <button onClick={() => navigate('/account')}>My account</button>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}

@@ -140,7 +140,7 @@ function App() {
         return 'My account';
 
       case '/search':
-        return 'Searching...';
+        return '';
 
       default:
         return 'Home';

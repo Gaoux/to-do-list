@@ -84,7 +84,8 @@
     .menu {
       position: absolute;
       width: 250px;
-      height: 650px;
+      // height: 650px;
+      height: fit-content;
       margin: -50px 0 0 -50px;
       padding: 50px;
       padding-top: 125px;
@@ -110,7 +111,7 @@
     input:checked ~ ul {
       transform: none;
     }
-    li:last-child {
+    li.account {
       position: absolute;
       bottom: 60px;
       border-top: solid 1px $very-light-grey;
@@ -132,7 +133,7 @@
     padding: 0;
     .input-search {
       position: fixed;
-      top: 100px;
+      top: 35px;
       left: 50%;
       transform: translate(-50%, -50%);
       height: 50px;
@@ -142,11 +143,11 @@
       font-size: 18px;
       letter-spacing: 2px;
       outline: none;
-      border-radius: 25px;
       transition: all 0.4s ease-in-out;
       background: none;
       padding-right: 40px;
       pointer-events: none;
+      z-index: 101;
     }
     .input-search::placeholder {
       color: $very-light-grey;
@@ -173,16 +174,12 @@
       pointer-events: auto;
       width: 350px;
       background-color: $secondary-color;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-      border-bottom: 0.1px solid $very-light-grey;
+      border-bottom: 1px solid $dark-grey;
     }
     .input-search:focus {
       pointer-events: auto;
       width: 400px;
       background-color: $secondary-color;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
       border-bottom: 1px solid $color-alpha;
     }
   }
