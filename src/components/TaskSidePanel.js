@@ -3,17 +3,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faX } from '@fortawesome/free-solid-svg-icons';
 
 function TaskSidePanel(props) {
-  const handleClose = () => props.setShow(false);
   const obj = props.obj;
-  let date = 'None';
-  if (obj.date) {
-    date =
-      obj.date.getMonth() +
-      '/' +
-      obj.date.getDate() +
-      '/' +
-      obj.date.getFullYear();
-  }
+  const handleClose = () => props.setShow(false);
+
+  const handleDateChange = (e) => {
+    obj.date = e.target.value;
+    props.onEdit(obj);
+  };
+  const handleRepeatChange = (e) => {
+    obj.repeat = e.target.value;
+    props.onEdit(obj);
+  };
+  const handleListNameChange = (e) => {
+    obj.listName = e.target.value;
+    props.onEdit(obj);
+  };
+  const handleNotesChange = (e) => {
+    obj.notes = e.target.value;
+    props.onEdit(obj);
+  };
+
   return (
     <div className="side-panel d-flex flex-column flex-shrink-0 p-3 ">
       <svg className="bi me-2" width="40" height="32">
@@ -36,25 +45,61 @@ function TaskSidePanel(props) {
           <label className="block  text-sm font-bold mb-2" htmlFor="duedate">
             Due Date
           </label>
-          <p className="value">{date}</p>
+          <input
+            className="input "
+            type="date"
+            value={obj.date}
+            onChange={handleDateChange}
+          />
         </div>
         <div className="mb-10">
           <label className="block  text-sm font-bold mb-2" htmlFor="repeat">
             Repeat
           </label>
-          <p className="value">{obj.repeat}</p>
+          <select
+            className="input"
+            name="repeat"
+            value={obj.repeat}
+            onChange={handleRepeatChange}
+          >
+            <option value="One Time">One Time</option>
+            <option value="Everyday"> Everyday</option>
+          </select>
+        </div>
+        <div className="mb-10">
+          <label className="block  text-sm font-bold mb-2" htmlFor="notes">
+            List
+          </label>
+          <select
+            className="input"
+            name="list"
+            value={obj.listName}
+            onChange={handleListNameChange}
+          >
+            <option value="None">None</option>
+            {props.lists.map((list) => (
+              <option key={list.name} value={list.name}>
+                {' '}
+                {list.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="mb-10">
           <label className="block  text-sm font-bold mb-2" htmlFor="notes">
             Task notes
           </label>
-          <p className="value notes">{obj.notes}</p>
+          <textarea
+            className="input notes"
+            value={obj.notes}
+            onChange={handleNotesChange}
+          ></textarea>
         </div>
       </form>
 
       <div className="dropdown">
         <button
-          className=" font-bold py-2 px-4 rounded"
+          className="delete font-bold py-2 px-4 rounded"
           onClick={() => {
             props.onDelete();
             props.setShow(false);

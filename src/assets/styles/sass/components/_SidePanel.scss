@@ -14,12 +14,16 @@
     color: $very-light-grey;
     font-size: $md;
   }
-  p {
+  .input {
     background-color: $secondary-color-hover;
     padding: 10px;
+    width: 100%;
     border-radius: 10px;
   }
-  p.notes {
+  .input:focus {
+    outline: none;
+  }
+  textarea.notes {
     height: 150px;
   }
   .dropdown {
@@ -29,7 +33,17 @@
     height: 70px;
     border-top: solid 1px $dark-grey;
     bottom: 0;
-    button {
+    button.save {
+      position: absolute;
+      bottom: 15px;
+      left: 30px;
+      text-transform: uppercase;
+      background-color: $color-alpha;
+      border-radius: 10px;
+      color: $white;
+      transition: transform 0.2s;
+    }
+    button.delete {
       position: absolute;
       bottom: 15px;
       right: 30px;

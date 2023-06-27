@@ -53,10 +53,10 @@ const defaultTasks = [
     name: 'Finish this React App',
     completed: false,
     important: true,
-    date: new Date(),
+    date: '2023-06-26',
     repeat: 'Everyday',
     notes: 'End this To Do App',
-    listName: '',
+    listName: 'Work',
   },
 
   {
@@ -127,6 +127,13 @@ function App() {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks[index].completed = !newTasks[index].completed;
+    setTasks(newTasks);
+  };
+  //Edit task
+  const editTask = (editedTask) => {
+    const newTasks = [...tasks];
+    const index = newTasks.findIndex((task) => task.name === editTask.name);
+    newTasks[index] = editedTask;
     setTasks(newTasks);
   };
   //Delete task
@@ -252,9 +259,11 @@ function App() {
       </Routes>
       {showTaskSidePanel ? (
         <TaskSidePanel
+          lists={lists}
           obj={objSelected}
           show={showTaskSidePanel}
           setShow={setShowTaskSidePanel}
+          onEdit={editTask}
           onDelete={() => deleteTask(objSelected.name)}
         />
       ) : null}

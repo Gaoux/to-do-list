@@ -14,12 +14,14 @@ function DailyTasks(props) {
     const source = element.props;
 
     if (source.repeat !== 'Everyday' && !source.date) return;
-    else if (
-      source.repeat === 'Everyday' ||
-      source.date.toDateString() === new Date().toDateString()
-    ) {
-      if (source.completed === false) uncompletedTasks.push(element);
-      else completedTasks.push(element);
+    else {
+      var curr = new Date();
+      curr.setDate(curr.getDate() - 1);
+      var date = curr.toISOString().substring(0, 10);
+      if (source.repeat === 'Everyday' || source.date === date) {
+        if (source.completed === false) uncompletedTasks.push(element);
+        else completedTasks.push(element);
+      }
     }
   });
 
