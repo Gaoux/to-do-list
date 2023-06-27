@@ -7,7 +7,10 @@ import { faStar as faSolidStar } from '@fortawesome/free-solid-svg-icons';
 function TaskItem(props) {
   return (
     <div className="task-list">
-      <div className="task-item flex mb-4 items-center wrap">
+      <div
+        className="task-item flex mb-4 items-center wrap"
+        onClick={props.openInfo}
+      >
         <button
           onClick={props.onCompleteClick}
           className="flex-no-shrink p-2 ml-4 mr-2 rounded "

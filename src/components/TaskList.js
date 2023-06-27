@@ -42,6 +42,7 @@ function TaskList(props) {
             important={task.props.important}
             notes={task.props.notes}
             onCompleteClick={() => props.onCompleteClick(task.props.name)}
+            openInfo={() => props.changeObjSelected(task.props.name, 'task')}
           />
         ))}
       </CompletedTasks>

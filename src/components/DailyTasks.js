@@ -13,9 +13,9 @@ function DailyTasks(props) {
     if (!React.isValidElement(element)) return;
     const source = element.props;
 
-    if (source.repeat !== 'everyday' && !source.date) return;
+    if (source.repeat !== 'Everyday' && !source.date) return;
     else if (
-      source.repeat === 'everyday' ||
+      source.repeat === 'Everyday' ||
       source.date.toDateString() === new Date().toDateString()
     ) {
       if (source.completed === false) uncompletedTasks.push(element);
@@ -47,6 +47,7 @@ function DailyTasks(props) {
             important={task.props.important}
             notes={task.props.notes}
             onCompleteClick={() => props.onCompleteClick(task.props.name)}
+            openInfo={() => props.changeObjSelected(task.props.name, 'task')}
           />
         ))}
       </CompletedTasks>

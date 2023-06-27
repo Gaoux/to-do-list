@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as *;
+
+.side-panel {
+  position: fixed;
+  right: 0;
+  background-color: $secondary-color;
+  width: 350px;
+  height: 100%;
+  top: 0;
+  color: $white;
+  z-index: 200;
+
+  label {
+    color: $very-light-grey;
+    font-size: $md;
+  }
+  p {
+    background-color: $secondary-color-hover;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  p.notes {
+    height: 150px;
+  }
+  .dropdown {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    height: 70px;
+    border-top: solid 1px $dark-grey;
+    bottom: 0;
+    button {
+      position: absolute;
+      bottom: 15px;
+      right: 30px;
+      text-transform: uppercase;
+      background-color: $ajax-red;
+      border-radius: 10px;
+      color: $white;
+      transition: transform 0.2s;
+    }
+  }
+}

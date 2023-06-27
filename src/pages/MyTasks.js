@@ -4,12 +4,15 @@ import { TaskItem } from '../components/TaskItem';
 import { AddButton } from '../components/AddButton';
 import { AddTaskModal } from '../components/AddTaskModal';
 
-function MyTasks({ tasks, setTasks, onCompleteClick }) {
+function MyTasks({ tasks, setTasks, onCompleteClick, changeObjSelected }) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
   return (
     <>
-      <TaskList onCompleteClick={onCompleteClick}>
+      <TaskList
+        onCompleteClick={onCompleteClick}
+        changeObjSelected={changeObjSelected}
+      >
         {tasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -20,6 +23,7 @@ function MyTasks({ tasks, setTasks, onCompleteClick }) {
             important={task.important}
             notes={task.notes}
             onCompleteClick={() => onCompleteClick(task.name)}
+            openInfo={() => changeObjSelected(task.name, 'task')}
           />
         ))}
       </TaskList>

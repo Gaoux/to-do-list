@@ -6,13 +6,13 @@ import { ListsContainer } from '../components/ListsContainer';
 import { ListItem } from '../components/ListItem';
 import React, { useState } from 'react';
 
-function Home({ tasks, setTasks, lists, setLists, onCompleteClick }) {
+function Home({ tasks, lists, onCompleteClick, changeObjSelected }) {
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
 
   return (
     <>
-      <ListsContainer>
+      <ListsContainer changeObjSelected={changeObjSelected}>
         {lists.map((list) => (
           <ListItem
             key={list.name}
@@ -20,10 +20,14 @@ function Home({ tasks, setTasks, lists, setLists, onCompleteClick }) {
             nTasks={list.nTasks}
             nTasksCompleted={list.nTasksCompleted}
             description={list.description}
+            openInfo={() => changeObjSelected(list.name, 'list')}
           />
         ))}
       </ListsContainer>
-      <DailyTasks onCompleteClick={onCompleteClick}>
+      <DailyTasks
+        onCompleteClick={onCompleteClick}
+        changeObjSelected={changeObjSelected}
+      >
         {tasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -34,16 +38,12 @@ function Home({ tasks, setTasks, lists, setLists, onCompleteClick }) {
             important={task.important}
             notes={task.notes}
             onCompleteClick={() => onCompleteClick(task.name)}
+            openInfo={() => changeObjSelected(task.name, 'task')}
           />
         ))}
       </DailyTasks>
       <AddButton active={activeAddTask} setActive={setActiveAddTask} />
-      <AddTaskModal
-        tasks={tasks}
-        setTasks={setTasks}
-        show={activeAddTask}
-        setShow={setActiveAddTask}
-      />
+      <AddTaskModal show={activeAddTask} setShow={setActiveAddTask} />
     </>
   );
 }

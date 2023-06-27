@@ -7,6 +7,7 @@ import { MyAccount } from './pages/MyAccount';
 import { Search } from './pages/Search';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
+import TaskSidePanel from './components/TaskSidePanel';
 
 const defaultLists = [
   {
@@ -52,8 +53,8 @@ const defaultTasks = [
     name: 'Finish this React App',
     completed: false,
     important: true,
-    date: '',
-    repeat: 'everyday',
+    date: new Date(),
+    repeat: 'Everyday',
     notes: 'End this To Do App',
     listName: '',
   },
@@ -62,7 +63,8 @@ const defaultTasks = [
     name: 'Cut hair with barber',
     completed: false,
     important: false,
-    date: new Date(),
+    date: '',
+    repeat: 'One time',
     notes: '',
     listName: '',
   },
@@ -70,6 +72,7 @@ const defaultTasks = [
     name: 'Drink water',
     completed: true,
     important: true,
+    repeat: 'Everyday',
     date: '',
     notes: '',
     listName: '',
@@ -79,7 +82,7 @@ const defaultTasks = [
     completed: false,
     important: false,
     date: '',
-    repeat: 'everyday',
+    repeat: 'Everyday',
     notes: '',
     listName: '',
   },
@@ -88,7 +91,7 @@ const defaultTasks = [
     completed: true,
     important: false,
     date: '',
-    repeat: 'everyday',
+    repeat: 'One time',
     notes: '',
     listName: '',
   },
@@ -100,7 +103,9 @@ function App() {
   const [lists, setLists] = useState(defaultLists);
   //Tasks
   const [tasks, setTasks] = useState(defaultTasks);
-
+  //SidePanel
+  const [showTaskSidePanel, setShowTaskSidePanel] = useState(true);
+  const [objSelected, setObjSelected] = useState(tasks[0]);
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -123,7 +128,29 @@ function App() {
     newTasks[index].completed = !newTasks[index].completed;
     setTasks(newTasks);
   };
-
+  //Delete task
+  const deleteTask = (name) => {
+    const newTasks = [...tasks];
+    const index = newTasks.findIndex((task) => task.name === name);
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
+  //Open Side bar on Click of Obj
+  const openSideBar = (type) => {
+    if (type === 'task') setShowTaskSidePanel(true);
+    // else setShowListSidePanel(true);
+  };
+  //ChangeObjSelected
+  const changeObjSelected = (name, type) => {
+    if (type === 'task') {
+      const index = tasks.findIndex((task) => task.name === name);
+      setObjSelected(tasks[index]);
+    } else {
+      const index = lists.findIndex((list) => list.name === name);
+      setObjSelected(lists[index]);
+    }
+    openSideBar(type);
+  };
   //Navbar Title
   const changeTitle = () => {
     switch (location.pathname) {
@@ -165,8 +192,8 @@ function App() {
               lists={lists}
               setLists={setLists}
               tasks={tasks}
-              setTasks={setTasks}
               onCompleteClick={completeTask}
+              changeObjSelected={changeObjSelected}
             />
           }
         />
@@ -176,8 +203,8 @@ function App() {
             <MyTasks
               list={lists}
               tasks={tasks}
-              setTasks={setTasks}
               onCompleteClick={completeTask}
+              changeObjSelected={changeObjSelected}
             />
           }
         />
@@ -192,7 +219,7 @@ function App() {
               lists={lists}
               setLists={setLists}
               tasks={tasks}
-              setTasks={setTasks}
+              changeObjSelected={changeObjSelected}
             />
           }
         />
@@ -210,10 +237,19 @@ function App() {
               listsLenght={searchLists.length}
               tasksLenght={searchTasks.length}
               onCompleteClick={completeTask}
+              changeObjSelected={changeObjSelected}
             />
           }
         />
       </Routes>
+      {showTaskSidePanel ? (
+        <TaskSidePanel
+          obj={objSelected}
+          show={showTaskSidePanel}
+          setShow={setShowTaskSidePanel}
+          onDelete={() => deleteTask(objSelected.name)}
+        />
+      ) : null}
     </>
   );
 }
