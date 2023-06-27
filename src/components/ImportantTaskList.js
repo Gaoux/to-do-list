@@ -37,7 +37,8 @@ function ImportantTaskList(props) {
             date={task.props.date}
             important={task.props.important}
             notes={task.props.notes}
-            openInfo={() => props.changeObjSelected(task.name, 'task')}
+            onCompleteClick={() => props.onCompleteClick(task.props.name)}
+            openInfo={() => props.changeObjSelected(task.props.name, 'task')}
           />
         ))}
       </CompletedTasks>

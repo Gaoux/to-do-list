@@ -104,7 +104,8 @@ function App() {
   //Tasks
   const [tasks, setTasks] = useState(defaultTasks);
   //SidePanel
-  const [showTaskSidePanel, setShowTaskSidePanel] = useState(true);
+  const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
+
   const [objSelected, setObjSelected] = useState(tasks[0]);
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
@@ -210,7 +211,14 @@ function App() {
         />
         <Route
           path="/important"
-          element={<Important tasks={tasks} setTasks={setTasks} />}
+          element={
+            <Important
+              tasks={tasks}
+              setTasks={setTasks}
+              onCompleteClick={completeTask}
+              changeObjSelected={changeObjSelected}
+            />
+          }
         />
         <Route
           path="/lists"

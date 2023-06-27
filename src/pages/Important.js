@@ -4,7 +4,10 @@ import { TaskItem } from '../components/TaskItem';
 
 function Important({ tasks, onCompleteClick, changeObjSelected }) {
   return (
-    <ImportantTaskList>
+    <ImportantTaskList
+      onCompleteClick={onCompleteClick}
+      changeObjSelected={changeObjSelected}
+    >
       {tasks.map((task) => (
         <TaskItem
           key={task.name}

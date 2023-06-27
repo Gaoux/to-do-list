@@ -20,7 +20,7 @@ function TaskSidePanel(props) {
         <use xlinkHref="#bootstrap"></use>
       </svg>
       <div className="header flex justify-between">
-        <span className="fs-4 mb-2"> Task </span>
+        <span className="fs-4 mb-2"> {obj.name} </span>
 
         <FontAwesomeIcon
           icon={faX}
@@ -32,13 +32,6 @@ function TaskSidePanel(props) {
       <hr />
 
       <form className=" rounded px-8 pt-6 pb-8 mb-4">
-        <div className="mb-10">
-          <label className="block  text-sm font-bold mb-2" htmlFor="name">
-            Name
-          </label>
-          <p className="value">{obj.name}</p>
-        </div>
-
         <div className="repeat-section mb-10 flex flex-col">
           <label className="block  text-sm font-bold mb-2" htmlFor="duedate">
             Due Date
