@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { CompletedTasks } from './CompletedTasks';
-import { TaskItem } from './TaskItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 function ImportantTaskList(props) {
   const [showCompleted, setShowCompleted] = useState('false');
@@ -19,29 +19,27 @@ function ImportantTaskList(props) {
     }
   });
 
+  const handleCompletedClick = () => {
+    setShowCompleted(!showCompleted);
+  };
+
   return (
     <div className="task-list-container">
       <h2 className="title m-4 lg">Important tasks</h2>
       {uncompletedTasks}
-      <CompletedTasks
-        show={showCompleted}
-        setShow={setShowCompleted}
-        nTasks={completedTasks.length}
+      <div
+        className={`subtitle flex ${completedTasks.length === 0 && 'hidden'}`}
       >
-        {completedTasks.map((task) => (
-          <TaskItem
-            key={task.props.name}
-            name={task.props.name}
-            completed={task.props.completed}
-            repeat={task.props.repeat}
-            date={task.props.date}
-            important={task.props.important}
-            notes={task.props.notes}
-            onCompleteClick={() => props.onCompleteClick(task.props.name)}
-            openInfo={() => props.changeObjSelected(task.props.name, 'task')}
-          />
-        ))}
-      </CompletedTasks>
+        <FontAwesomeIcon
+          className={`icon ${showCompleted && 'icon--rotate'}`}
+          icon={faAngleDown}
+          onClick={handleCompletedClick}
+        />
+        <h3 className="ml-4 mb-4 mt-4 lg">
+          Completed ({completedTasks.length})
+        </h3>
+      </div>
+      {showCompleted ? null : completedTasks}
     </div>
   );
 }
