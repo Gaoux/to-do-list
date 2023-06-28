@@ -15,10 +15,7 @@ function MyTasks({
   const [activeAddTask, setActiveAddTask] = useState(false);
   return (
     <>
-      <TaskList
-        onCompleteClick={onCompleteClick}
-        changeObjSelected={changeObjSelected}
-      >
+      <TaskList onCompleteClick={onCompleteClick}>
         {tasks.map((task) => (
           <TaskItem
             key={task.name}

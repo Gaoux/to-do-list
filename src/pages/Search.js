@@ -36,7 +36,7 @@ function Search({
       ) : null}
 
       {emptyLists || emptySearchValue ? null : (
-        <ListsContainer>
+        <ListsContainer changeObjSelected={changeObjSelected}>
           {lists.map((list) => (
             <ListItem
               key={list.name}
@@ -44,15 +44,13 @@ function Search({
               nTasks={list.nTasks}
               nTasksCompleted={list.nTasksCompleted}
               description={list.description}
+              openInfo={() => changeObjSelected(list.name, 'list')}
             />
           ))}
         </ListsContainer>
       )}
       {emptyTasks || emptySearchValue ? null : (
-        <TaskList
-          onCompleteClick={onCompleteClick}
-          changeObjSelected={changeObjSelected}
-        >
+        <TaskList onCompleteClick={onCompleteClick}>
           {tasks.map((task) => (
             <TaskItem
               key={task.name}

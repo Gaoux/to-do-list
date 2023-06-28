@@ -9,10 +9,7 @@ function Important({
   changeObjSelected,
 }) {
   return (
-    <ImportantTaskList
-      onCompleteClick={onCompleteClick}
-      changeObjSelected={changeObjSelected}
-    >
+    <ImportantTaskList onCompleteClick={onCompleteClick}>
       {tasks.map((task) => (
         <TaskItem
           key={task.name}

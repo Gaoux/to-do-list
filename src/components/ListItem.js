@@ -27,7 +27,10 @@ function ListItem(props) {
     width: percentageOfTaskCompleted + '%',
   };
   return (
-    <div className="list-item rounded overflow-hidden shadow-lg">
+    <div
+      className="list-item rounded overflow-hidden shadow-lg "
+      onClick={props.openInfo}
+    >
       <div className="px-6 py-4">
         <p className="n-tasks text-base">{props.nTasks} tasks</p>
         <div className="name font-bold text-xl mb-2">{props.name}</div>

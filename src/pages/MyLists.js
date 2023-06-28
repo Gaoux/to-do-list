@@ -3,7 +3,7 @@ import { AddButton } from '../components/AddButton';
 import { AddListModal } from '../components/AddListModal';
 import { ListItem } from '../components/ListItem';
 
-function MyLists({ lists, setLists }) {
+function MyLists({ lists, setLists, changeObjSelected }) {
   const [activeAddList, setActiveAddList] = useState(false);
   return (
     <>
@@ -18,6 +18,7 @@ function MyLists({ lists, setLists }) {
                 nTasks={list.nTasks}
                 nTasksCompleted={list.nTasksCompleted}
                 description={list.description}
+                openInfo={() => changeObjSelected(list.name, 'list')}
               />
             ))}
           </div>

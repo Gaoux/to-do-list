@@ -8,42 +8,49 @@ import { Search } from './pages/Search';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import React, { useState } from 'react';
 import TaskSidePanel from './components/TaskSidePanel';
+import ListSidePanel from './components/ListSidePanel';
 
 const defaultLists = [
   {
     name: 'Work',
     nTasks: 2,
     nTasksCompleted: 1,
+    description: '',
     tasks: [],
   },
   {
     name: 'House',
     nTasks: 5,
     nTasksCompleted: 4,
+    description: '',
     tasks: [],
   },
   {
     name: 'Whatever',
     nTasks: 12,
     nTasksCompleted: 12,
+    description: '',
     tasks: [],
   },
   {
     name: 'House 2',
     nTasks: 10,
     nTasksCompleted: 2,
+    description: '',
     tasks: [],
   },
   {
     name: 'Lala',
     nTasks: 9,
     nTasksCompleted: 4,
+    description: '',
     tasks: [],
   },
   {
     name: 'Work 2',
     nTasks: 2,
     nTasksCompleted: 1,
+    description: '',
     tasks: [],
   },
 ];
@@ -105,8 +112,9 @@ function App() {
   const [tasks, setTasks] = useState(defaultTasks);
   //SidePanel
   const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
+  const [showListSidePanel, setShowListSidePanel] = useState(true);
 
-  const [objSelected, setObjSelected] = useState(tasks[0]);
+  const [objSelected, setObjSelected] = useState({});
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -150,10 +158,24 @@ function App() {
     newTasks.splice(index, 1);
     setTasks(newTasks);
   };
+  //Edit list
+  const editList = (editedList) => {
+    const newLists = [...lists];
+    const index = newLists.findIndex((list) => list.name === editedList.name);
+    newLists[index] = editedList;
+    setLists(newLists);
+  };
+  //Delete list
+  const deleteList = (name) => {
+    const newLists = [...lists];
+    const index = newLists.findIndex((list) => list.name === name);
+    newLists.splice(index, 1);
+    setLists(newLists);
+  };
   //Open Side bar on Click of Obj
   const openSideBar = (type) => {
     if (type === 'task') setShowTaskSidePanel(true);
-    // else setShowListSidePanel(true);
+    else setShowListSidePanel(true);
   };
   //ChangeObjSelected
   const changeObjSelected = (name, type) => {
@@ -268,7 +290,7 @@ function App() {
           }
         />
       </Routes>
-      {showTaskSidePanel ? (
+      {showTaskSidePanel && tasks.includes(objSelected) ? (
         <TaskSidePanel
           lists={lists}
           obj={objSelected}
@@ -276,6 +298,18 @@ function App() {
           setShow={setShowTaskSidePanel}
           onEdit={editTask}
           onDelete={() => deleteTask(objSelected.name)}
+        />
+      ) : null}
+      {showListSidePanel && lists.includes(objSelected) ? (
+        <ListSidePanel
+          obj={objSelected}
+          show={showListSidePanel}
+          setShow={setShowListSidePanel}
+          onEdit={editList}
+          onDelete={() => deleteList(objSelected.name)}
+          onCompleteClick={completeTask}
+          onImportantClick={makeImportantTask}
+          changeObjSelected={changeObjSelected}
         />
       ) : null}
     </>
