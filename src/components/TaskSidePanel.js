@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faX } from '@fortawesome/free-solid-svg-icons';
+import { TodoContext } from '../TodoContext';
 
-function TaskSidePanel(props) {
-  const obj = props.obj;
-  const handleClose = () => props.setShow(false);
+function TaskSidePanel() {
+  const {
+    lists,
+    taskSelected,
+    updateListTask,
+    setShowTaskSidePanel,
+    editTask,
+    deleteTask,
+  } = useContext(TodoContext);
+  const handleClose = () => setShowTaskSidePanel(false);
 
   const handleDateChange = (e) => {
-    obj.date = e.target.value;
-    props.onEdit(obj);
+    taskSelected.date = e.target.value;
+    editTask(taskSelected);
   };
   const handleRepeatChange = (e) => {
-    obj.repeat = e.target.value;
-    props.onEdit(obj);
+    taskSelected.repeat = e.target.value;
+    editTask(taskSelected);
   };
   const handleListNameChange = (e) => {
-    props.updateListTask(obj.listName, e.target.value, obj.name);
-    obj.listName = e.target.value;
-    props.onEdit(obj);
+    updateListTask(taskSelected.listName, e.target.value, taskSelected.name);
+    taskSelected.listName = e.target.value;
+    editTask(taskSelected);
   };
   const handleNotesChange = (e) => {
-    obj.notes = e.target.value;
-    props.onEdit(obj);
+    taskSelected.notes = e.target.value;
+    editTask(taskSelected);
   };
 
   return (
@@ -30,7 +38,7 @@ function TaskSidePanel(props) {
         <use xlinkHref="#bootstrap"></use>
       </svg>
       <div className="header flex justify-between">
-        <span className="fs-4 mb-2"> {obj.name} </span>
+        <span className="fs-4 mb-2"> {taskSelected.name} </span>
 
         <FontAwesomeIcon
           icon={faX}
@@ -49,7 +57,7 @@ function TaskSidePanel(props) {
           <input
             className="input "
             type="date"
-            value={obj.date}
+            value={taskSelected.date}
             onChange={handleDateChange}
           />
         </div>
@@ -60,7 +68,7 @@ function TaskSidePanel(props) {
           <select
             className="input"
             name="repeat"
-            value={obj.repeat}
+            value={taskSelected.repeat}
             onChange={handleRepeatChange}
           >
             <option value="One Time">One Time</option>
@@ -74,11 +82,11 @@ function TaskSidePanel(props) {
           <select
             className="input"
             name="list"
-            value={obj.listName}
+            value={taskSelected.listName}
             onChange={handleListNameChange}
           >
             <option value="None">None</option>
-            {props.lists.map((list) => (
+            {lists.map((list) => (
               <option key={list.name} value={list.name}>
                 {' '}
                 {list.name}
@@ -92,7 +100,7 @@ function TaskSidePanel(props) {
           </label>
           <textarea
             className="input notes"
-            value={obj.notes}
+            value={taskSelected.notes}
             onChange={handleNotesChange}
           ></textarea>
         </div>
@@ -102,8 +110,8 @@ function TaskSidePanel(props) {
         <button
           className="delete font-bold py-2 px-4 rounded"
           onClick={() => {
-            props.onDelete();
-            props.setShow(false);
+            deleteTask(taskSelected.name);
+            setShowTaskSidePanel(false);
           }}
         >
           Delete <FontAwesomeIcon className="ml-2" icon={faTrash} />
@@ -113,4 +121,4 @@ function TaskSidePanel(props) {
   );
 }
 
-export default TaskSidePanel;
+export { TaskSidePanel };

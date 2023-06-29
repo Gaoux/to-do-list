@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -8,25 +8,34 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { TodoContext } from '../../TodoContext';
 
-function Navbar(props) {
+function Navbar() {
+  const {
+    activeSearch,
+    setActiveSearch,
+    searchValue,
+    setSearchValue,
+    pageTitle,
+  } = useContext(TodoContext);
+
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
-    if (!props.activeSearch) {
+    if (!activeSearch) {
       navigate('/search');
     } else {
       navigate(-1);
     }
-    props.setActiveSearch(!props.activeSearch);
+    setActiveSearch(!activeSearch);
   };
 
   const hadleSearchChange = (e) => {
-    props.setSearchValue(e.target.value);
+    setSearchValue(e.target.value);
   };
   return (
     <div className="navbar">
-      {props.activeSearch ? (
+      {activeSearch ? (
         <div> </div>
       ) : (
         <div className="menuToggle">
@@ -77,17 +86,15 @@ function Navbar(props) {
         </div>
       )}
 
-      <h2 className="title">{props.title}</h2>
+      <h2 className="title">{pageTitle}</h2>
       <div className="search-box">
         <button className="btn-search" onClick={handleSearchClick}>
-          <FontAwesomeIcon icon={props.activeSearch ? faX : faSearch} />
+          <FontAwesomeIcon icon={activeSearch ? faX : faSearch} />
         </button>
         <input
           type="text"
-          className={`input-search ${
-            props.activeSearch && 'input-search--active'
-          }`}
-          value={props.searchValue}
+          className={`input-search ${activeSearch && 'input-search--active'}`}
+          value={searchValue}
           placeholder="Search..."
           onChange={hadleSearchChange}
         />

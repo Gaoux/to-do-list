@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ImportantTaskList } from './ImportantTaskList';
 import { TaskItem } from '../../components/TaskItem';
+import { TodoContext } from '../../TodoContext';
 
-function Important({
-  tasks,
-  onCompleteClick,
-  onImportantClick,
-  changeTaskSelected,
-}) {
+function Important() {
+  const { tasks, completeTask, makeTaskImportant, changeTaskSelected } =
+    useContext(TodoContext);
   return (
-    <ImportantTaskList onCompleteClick={onCompleteClick}>
+    <ImportantTaskList>
       {tasks.map((task) => (
         <TaskItem
           key={task.name}
@@ -19,8 +17,8 @@ function Important({
           date={task.date}
           important={task.important}
           notes={task.notes}
-          onCompleteClick={() => onCompleteClick(task.name)}
-          onImportantClick={() => onImportantClick(task.name)}
+          onCompleteClick={() => completeTask(task.name)}
+          onImportantClick={() => makeTaskImportant(task.name)}
           openInfo={() => changeTaskSelected(task.name)}
         />
       ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TaskList } from '../../components/TaskList';
 import { TaskItem } from '../../components/TaskItem';
 import { AddButton } from '../../components/ui/AddButton';
@@ -6,16 +6,18 @@ import { AddTaskModal } from '../../components/ui/AddTaskModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { TodoContext } from '../../TodoContext';
 
-function ListPage({
-  list,
-  tasks,
-  onCompleteClick,
-  onImportantClick,
-  changeTaskSelected,
-  onDelete,
-}) {
-  const listTasks = tasks.filter((task) => task.listName === list.name);
+function ListPage() {
+  const {
+    listSelected,
+    tasks,
+    deleteList,
+    completeTask,
+    makeTaskImportant,
+    changeTaskSelected,
+  } = useContext(TodoContext);
+  const listTasks = tasks.filter((task) => task.listName === listSelected.name);
   const navigate = useNavigate();
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
@@ -23,21 +25,21 @@ function ListPage({
     <div className="list-info-container">
       <div className="list-title lg">
         <FontAwesomeIcon icon={faList} className="mr-3" />
-        <h2>{list.name}</h2>
+        <h2>{listSelected.name}</h2>
         <button
           className="delete font-bold py-2 px-4 rounded"
           onClick={() => {
             navigate(-1);
-            onDelete();
+            deleteList(listSelected.name);
           }}
         >
           Delete list <FontAwesomeIcon className="ml-2" icon={faTrash} />
         </button>
       </div>
       <div className="list-description">
-        <p>{list.description}</p>
+        <p>{listSelected.description}</p>
       </div>
-      <TaskList onCompleteClick={onCompleteClick}>
+      <TaskList completeTask={completeTask}>
         {listTasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -47,8 +49,8 @@ function ListPage({
             date={task.date}
             important={task.important}
             notes={task.notes}
-            onCompleteClick={() => onCompleteClick(task.name)}
-            onImportantClick={() => onImportantClick(task.name)}
+            completeTask={() => completeTask(task.name)}
+            makeTaskImportant={() => makeTaskImportant(task.name)}
             openInfo={() => changeTaskSelected(task.name)}
           />
         ))}

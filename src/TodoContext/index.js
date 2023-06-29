@@ -203,7 +203,7 @@ function TodoProvider({ children }) {
     saveTasks(newTasks);
   };
   //Make tasks Important or not
-  const makeImportantTask = (name) => {
+  const makeTaskImportant = (name) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks[index].important = !newTasks[index].important;
@@ -284,7 +284,7 @@ function TodoProvider({ children }) {
         setSearchValue,
         pageTitle,
         completeTask,
-        makeImportantTask,
+        makeTaskImportant,
         changeTaskSelected,
         changeListSelected,
         searchLists,

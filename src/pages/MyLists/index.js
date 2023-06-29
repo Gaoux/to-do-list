@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AddButton } from '../../components/ui/AddButton';
 import { AddListModal } from './AddListModal';
 import { ListItem } from '../../components/ListItem';
+import { TodoContext } from '../../TodoContext';
 
-function MyLists({ lists, changeListSelected }) {
+function MyLists() {
+  const { lists, changeListSelected } = useContext(TodoContext);
   const [activeAddList, setActiveAddList] = useState(false);
 
   return (

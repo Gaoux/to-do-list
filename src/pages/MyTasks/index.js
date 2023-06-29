@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TaskList } from '../../components/TaskList';
 import { TaskItem } from '../../components/TaskItem';
 import { AddButton } from '../../components/ui/AddButton';
 import { AddTaskModal } from '../../components/ui/AddTaskModal';
+import { TodoContext } from '../../TodoContext';
 
-function MyTasks({
-  tasks,
-  onCompleteClick,
-  onImportantClick,
-  changeTaskSelected,
-}) {
+function MyTasks() {
+  const { tasks, completeTask, makeTaskImportant, changeTaskSelected } =
+    useContext(TodoContext);
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
   return (
     <>
-      <TaskList onCompleteClick={onCompleteClick}>
+      <TaskList>
         {tasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -24,8 +22,8 @@ function MyTasks({
             date={task.date}
             important={task.important}
             notes={task.notes}
-            onCompleteClick={() => onCompleteClick(task.name)}
-            onImportantClick={() => onImportantClick(task.name)}
+            onCompleteClick={() => completeTask(task.name)}
+            onImportantClick={() => makeTaskImportant(task.name)}
             openInfo={() => changeTaskSelected(task.name, 'task')}
           />
         ))}

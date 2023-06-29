@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TaskList } from '../../components/TaskList';
 import { TaskItem } from '../../components/TaskItem';
 import { ListsContainer } from '../../components/ListsContainer';
 import { ListItem } from '../../components/ListItem';
 import SearchIcon from './SearchIcon';
+import { TodoContext } from '../../TodoContext';
 
-function Search({
-  searchValue,
-  tasks,
-  lists,
-  tasksLenght,
-  listsLenght,
-  onCompleteClick,
-  onImportantClick,
-  changeTaskSelected,
-  changeListSelected,
-}) {
+function Search() {
+  const {
+    searchValue,
+    searchTasks,
+    searchLists,
+    completeTask,
+    makeTaskImportant,
+    changeTaskSelected,
+    changeListSelected,
+  } = useContext(TodoContext);
+  const tasksLenght = searchTasks.length;
+  const listsLenght = searchLists.length;
+
   const emptyTasks = tasksLenght === 0;
   const emptyLists = listsLenght === 0;
   const emptySearchValue = searchValue === '';
@@ -38,7 +41,7 @@ function Search({
 
       {emptyLists || emptySearchValue ? null : (
         <ListsContainer>
-          {lists.map((list) => (
+          {searchLists.map((list) => (
             <ListItem
               key={list.name}
               name={list.name}
@@ -51,8 +54,8 @@ function Search({
         </ListsContainer>
       )}
       {emptyTasks || emptySearchValue ? null : (
-        <TaskList onCompleteClick={onCompleteClick}>
-          {tasks.map((task) => (
+        <TaskList completeTask={completeTask}>
+          {searchTasks.map((task) => (
             <TaskItem
               key={task.name}
               name={task.name}
@@ -61,8 +64,8 @@ function Search({
               date={task.date}
               important={task.important}
               notes={task.notes}
-              onCompleteClick={() => onCompleteClick(task.name)}
-              onImportantClick={() => onImportantClick(task.name)}
+              completeTask={() => completeTask(task.name)}
+              makeTaskImportant={() => makeTaskImportant(task.name)}
               openInfo={() => changeTaskSelected(task.name)}
             />
           ))}

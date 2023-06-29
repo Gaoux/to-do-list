@@ -4,16 +4,18 @@ import { AddButton } from '../../components/ui/AddButton';
 import { AddTaskModal } from '../../components/ui/AddTaskModal';
 import { ListsContainer } from '../../components/ListsContainer';
 import { ListItem } from '../../components/ListItem';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { TodoContext } from '../../TodoContext';
 
-function Home({
-  tasks,
-  lists,
-  onCompleteClick,
-  onImportantClick,
-  changeTaskSelected,
-  changeListSelected,
-}) {
+function Home() {
+  const {
+    tasks,
+    lists,
+    completeTask,
+    makeTaskImportant,
+    changeTaskSelected,
+    changeListSelected,
+  } = useContext(TodoContext);
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
 
@@ -30,7 +32,7 @@ function Home({
           />
         ))}
       </ListsContainer>
-      <DailyTasks onCompleteClick={onCompleteClick}>
+      <DailyTasks>
         {tasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -40,8 +42,8 @@ function Home({
             date={task.date}
             important={task.important}
             notes={task.notes}
-            onCompleteClick={() => onCompleteClick(task.name)}
-            onImportantClick={() => onImportantClick(task.name)}
+            onCompleteClick={() => completeTask(task.name)}
+            onImportantClick={() => makeTaskImportant(task.name)}
             openInfo={() => changeTaskSelected(task.name)}
           />
         ))}
