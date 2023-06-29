@@ -9,11 +9,13 @@ import { useNavigate } from 'react-router-dom';
 
 function ListPage({
   list,
+  tasks,
   onCompleteClick,
   onImportantClick,
   changeTaskSelected,
   onDelete,
 }) {
+  const listTasks = tasks.filter((task) => task.listName === list.name);
   const navigate = useNavigate();
   //Add task modal
   const [activeAddTask, setActiveAddTask] = useState(false);
@@ -33,7 +35,7 @@ function ListPage({
         </button>
       </div>
       <TaskList onCompleteClick={onCompleteClick}>
-        {list.tasks.map((task) => (
+        {listTasks.map((task) => (
           <TaskItem
             key={task.name}
             name={task.name}

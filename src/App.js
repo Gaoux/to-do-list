@@ -65,60 +65,21 @@ const defaultLists = [
     nTasks: 2,
     nTasksCompleted: 1,
     description: '',
-    tasks: [
-      {
-        name: 'Finish this React App',
-        completed: false,
-        important: true,
-        date: '2023-06-26',
-        repeat: 'Everyday',
-        notes: 'End this To Do App',
-        listName: 'Work',
-      },
-    ],
+    tasks: ['Finish this React App'],
   },
   {
     name: 'House',
     nTasks: 5,
     nTasksCompleted: 4,
     description: '',
-    tasks: [
-      {
-        name: 'Prepare dinner',
-        completed: true,
-        important: false,
-        date: '',
-        repeat: 'One time',
-        notes: '',
-        listName: 'House',
-      },
-    ],
+    tasks: ['Prepare dinner'],
   },
   {
     name: 'Whatever',
     nTasks: 12,
     nTasksCompleted: 12,
     description: '',
-    tasks: [
-      {
-        name: 'Cut hair with barber',
-        completed: false,
-        important: false,
-        date: '',
-        repeat: 'One time',
-        notes: '',
-        listName: 'Whatever',
-      },
-      {
-        name: 'Drink water',
-        completed: true,
-        important: true,
-        repeat: 'Everyday',
-        date: '',
-        notes: '',
-        listName: 'Whatever',
-      },
-    ],
+    tasks: ['Cut hair with barber', 'Drink water'],
   },
 ];
 
@@ -150,14 +111,21 @@ function App() {
     return listName.includes(search);
   });
   //Update lists
-  const updateLists = () => {
+  const updateListTask = (previousListName, newListName, taskName) => {
     const newLists = [...lists];
-    for (const i in newLists) {
-      const newListTasks = tasks.filter(
-        (task) => task.listName === newLists[i].name
+    //Delete task from previous list if it was in one
+    const indexOfPrevious = newLists.findIndex(
+      (list) => list.name === previousListName
+    );
+    if (indexOfPrevious > -1)
+      newLists[indexOfPrevious].tasks = newLists[indexOfPrevious].tasks.filter(
+        (task) => task !== taskName
       );
-      newLists[i].tasks = newListTasks;
-    }
+
+    //Add task to new list if added to one
+    const index = newLists.findIndex((list) => list.name === newListName);
+    if (index > -1) newLists[index].tasks.push(taskName);
+
     setLists(newLists);
   };
   //Complete or uncomplete tasks
@@ -177,18 +145,37 @@ function App() {
   //Edit task
   const editTask = (editedTask) => {
     const newTasks = [...tasks];
-    const index = newTasks.findIndex((task) => task.name === editTask.name);
+    const index = newTasks.findIndex((task) => task.name === editedTask.name);
+    if (newTasks[index].listName !== editedTask.listName) {
+      updateListTask(
+        newTasks[index].listName,
+        editedTask.listName,
+        editedTask.name
+      );
+    }
     newTasks[index] = editedTask;
     setTasks(newTasks);
-    updateLists();
   };
   //Delete task
   const deleteTask = (name) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
+
+    //Eliminate task name from list
+    const taskListName = newTasks[index].listName;
+    if (taskListName !== 'None') {
+      const newLists = [...lists];
+      const listIndex = newLists.findIndex(
+        (list) => list.name === taskListName
+      );
+      const indexOfTask = newLists[listIndex].tasks.findIndex(
+        (taskName) => taskName === name
+      );
+      newLists.splice(indexOfTask, 1);
+      setLists(newLists);
+    }
     newTasks.splice(index, 1);
     setTasks(newTasks);
-    updateLists();
   };
   //Delete list
   const deleteList = (listName) => {
@@ -323,6 +310,7 @@ function App() {
           element={
             <ListPage
               lists={lists}
+              tasks={tasks}
               list={listSelected}
               deleteList={deleteList}
               onCompleteClick={completeTask}
