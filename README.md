@@ -4,10 +4,20 @@ This repository contains a simple To Do List application built with React.js.
 
 ## Features
 
-- Add, edit, and delete tasks
-- Mark tasks as complete
-- Add, edit, and delete lists of tasks
-- Search for tasks
+### Task Management
+
+- Users can create, update, and delete tasks.
+- Each task includes a title, due date, repeat option, notes, importance and status (e.g., completed or in progress).
+- Users can set reminders for tasks.
+- Tasks can be prioritized.
+
+### List Management
+
+- Users can create, update, and delete lists.
+- Lists are groups of related tasks that can be categorized by a specific theme or purpose.
+- Users can add tasks to a particular list.
+- Each list includes a title and their group of tasks.
+- Users can view all the tasks associated with a specific list.
 
 ## Requirements
 
