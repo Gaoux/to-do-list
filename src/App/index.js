@@ -1,15 +1,7 @@
-import { Navbar } from '../components/layout/Navbar';
-import { Home } from '../pages/Home';
-import { MyTasks } from '../pages/MyTasks';
-import { MyLists } from '../pages/MyLists';
-import { Important } from '../pages/Important';
-import { MyAccount } from '../pages/MyAccount';
-import { Search } from '../pages/SearchPage';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import TaskSidePanel from '../components/TaskSidePanel';
-import { ListPage } from '../pages/ListPage';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import React, { useState } from 'react';
+import { AppUI } from './AppUI';
+import React, { useState, useEffect } from 'react';
 
 const defaultTasks = [
   {
@@ -32,6 +24,15 @@ const defaultTasks = [
     listName: 'Whatever',
   },
   {
+    name: 'Eat with family',
+    completed: false,
+    important: false,
+    date: '',
+    repeat: 'One time',
+    notes: '',
+    listName: 'Whatever',
+  },
+  {
     name: 'Drink water',
     completed: true,
     important: true,
@@ -42,12 +43,12 @@ const defaultTasks = [
   },
   {
     name: 'Go to the gym',
-    completed: false,
+    completed: true,
     important: false,
     date: '',
     repeat: 'Everyday',
     notes: '',
-    listName: 'None',
+    listName: 'Work',
   },
   {
     name: 'Prepare dinner',
@@ -63,9 +64,9 @@ const defaultTasks = [
 const defaultLists = [
   {
     name: 'Work',
-    nTasks: 1,
-    nTasksCompleted: 0,
-    tasks: ['Finish this React App'],
+    nTasks: 2,
+    nTasksCompleted: 1,
+    tasks: ['Finish this React App', 'Go to the gym'],
   },
   {
     name: 'House',
@@ -75,9 +76,9 @@ const defaultLists = [
   },
   {
     name: 'Whatever',
-    nTasks: 2,
+    nTasks: 3,
     nTasksCompleted: 1,
-    tasks: ['Cut hair with barber', 'Drink water'],
+    tasks: ['Cut hair with barber', 'Eat with family', 'Drink water'],
   },
 ];
 
@@ -94,6 +95,8 @@ function App() {
   const [tasks, saveTasks] = useLocalStorage('TASKS_V1', defaultTasks);
   //Lists
   const [lists, saveLists] = useLocalStorage('LISTS_V1', defaultLists);
+  //Navbar title
+  const [pageTitle, setPageTitle] = useState('Home');
   //SidePanel
   const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
   //Obj selected
@@ -102,6 +105,37 @@ function App() {
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  //Update navbar title on navigate
+  useEffect(() => {
+    const changeTitle = () => {
+      switch (location.pathname) {
+        case '/tasks':
+          return 'My tasks';
+
+        case '/important':
+          return 'Important';
+
+        case '/lists':
+          return 'My lists';
+
+        case '/account':
+          return 'My account';
+
+        case '/search':
+          return '';
+
+        case '/list-info':
+          return 'List';
+
+        default:
+          return 'Home';
+      }
+    };
+    const newPageTitle = changeTitle();
+    setPageTitle(newPageTitle);
+  }, [location]);
+  // const pageTitle = changeTitle();
 
   //Search lists
   const searchTasks = tasks.filter((task) => {
@@ -114,7 +148,6 @@ function App() {
     const search = searchValue.toLowerCase();
     return listName.includes(search);
   });
-
   //Update lists
   const updateListTask = (previousListName, newListName, taskName) => {
     const newLists = [...lists];
@@ -223,134 +256,31 @@ function App() {
     setListSelected(lists[index]);
     navigate('/list-info');
   };
-  //Navbar Title
-  const changeTitle = () => {
-    switch (location.pathname) {
-      case '/tasks':
-        return 'My tasks';
 
-      case '/important':
-        return 'Important';
-
-      case '/lists':
-        return 'My lists';
-
-      case '/account':
-        return 'My account';
-
-      case '/search':
-        return '';
-
-      case '/list-info':
-        return 'List';
-
-      default:
-        return 'Home';
-    }
-  };
-  const pageTitle = changeTitle();
-  //
   return (
-    <>
-      <Navbar
-        activeSearch={activeSearch}
-        setActiveSearch={setActiveSearch}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        title={pageTitle}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              lists={lists}
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route
-          path="/tasks"
-          element={
-            <MyTasks
-              list={lists}
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-            />
-          }
-        />
-        <Route
-          path="/important"
-          element={
-            <Important
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-            />
-          }
-        />
-        <Route
-          path="/lists"
-          element={
-            <MyLists
-              lists={lists}
-              tasks={tasks}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route path="/account" element={<MyAccount tasks={tasks} />} />
-        <Route
-          path="/search"
-          element={
-            <Search
-              searchValue={searchValue}
-              lists={searchLists}
-              tasks={searchTasks}
-              listsLenght={searchLists.length}
-              tasksLenght={searchTasks.length}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route
-          path="/list-info"
-          element={
-            <ListPage
-              lists={lists}
-              tasks={tasks}
-              list={listSelected}
-              deleteList={deleteList}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              onDelete={() => deleteList(listSelected.name)}
-            />
-          }
-        />
-      </Routes>
-      {showTaskSidePanel && tasks.includes(taskSelected) ? (
-        <TaskSidePanel
-          lists={lists}
-          updateListTask={updateListTask}
-          obj={taskSelected}
-          show={showTaskSidePanel}
-          setShow={setShowTaskSidePanel}
-          onEdit={editTask}
-          onDelete={() => deleteTask(taskSelected.name)}
-        />
-      ) : null}
-    </>
+    <AppUI
+      tasks={tasks}
+      lists={lists}
+      showTaskSidePanel={showTaskSidePanel}
+      setShowTaskSidePanel={setShowTaskSidePanel}
+      taskSelected={taskSelected}
+      listSelected={listSelected}
+      activeSearch={activeSearch}
+      setActiveSearch={setActiveSearch}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+      pageTitle={pageTitle}
+      completeTask={completeTask}
+      makeImportantTask={makeImportantTask}
+      changeTaskSelected={changeTaskSelected}
+      changeListSelected={changeListSelected}
+      searchLists={searchLists}
+      searchTasks={searchTasks}
+      deleteTask={deleteTask}
+      deleteList={deleteList}
+      editTask={editTask}
+      updateListTask={updateListTask}
+    />
   );
 }
 
