@@ -6,7 +6,7 @@ import { Important } from './pages/Important';
 import { MyAccount } from './pages/MyAccount';
 import { Search } from './pages/Search';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskSidePanel from './components/TaskSidePanel';
 import { ListPage } from './pages/ListPage';
 
@@ -28,7 +28,7 @@ const defaultTasks = [
     date: '',
     repeat: 'One time',
     notes: '',
-    listName: '',
+    listName: 'Whatever',
   },
   {
     name: 'Drink water',
@@ -37,7 +37,7 @@ const defaultTasks = [
     repeat: 'Everyday',
     date: '',
     notes: '',
-    listName: '',
+    listName: 'Whatever',
   },
   {
     name: 'Go to the gym',
@@ -55,7 +55,7 @@ const defaultTasks = [
     date: '',
     repeat: 'One time',
     notes: '',
-    listName: '',
+    listName: 'House',
   },
 ];
 
@@ -65,40 +65,19 @@ const defaultLists = [
     nTasks: 2,
     nTasksCompleted: 1,
     description: '',
-    tasks: defaultTasks,
+    tasks: [],
   },
   {
     name: 'House',
     nTasks: 5,
     nTasksCompleted: 4,
     description: '',
-    tasks: defaultTasks,
+    tasks: [],
   },
   {
     name: 'Whatever',
     nTasks: 12,
     nTasksCompleted: 12,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'House 2',
-    nTasks: 10,
-    nTasksCompleted: 2,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'Lala',
-    nTasks: 9,
-    nTasksCompleted: 4,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'Work 2',
-    nTasks: 2,
-    nTasksCompleted: 1,
     description: '',
     tasks: [],
   },
@@ -119,6 +98,17 @@ function App() {
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    const newLists = [...lists];
+    for (const i in newLists) {
+      const newListTasks = tasks.filter(
+        (task) => task.listName === newLists[i].name
+      );
+      newLists[i].tasks = newListTasks;
+    }
+    setLists(newLists);
+  });
 
   //Search lists
   const searchTasks = tasks.filter((task) => {
