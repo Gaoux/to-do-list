@@ -13,7 +13,8 @@ function Search({
   listsLenght,
   onCompleteClick,
   onImportantClick,
-  changeObjSelected,
+  changeTaskSelected,
+  changeListSelected,
 }) {
   const emptyTasks = tasksLenght === 0;
   const emptyLists = listsLenght === 0;
@@ -36,7 +37,7 @@ function Search({
       ) : null}
 
       {emptyLists || emptySearchValue ? null : (
-        <ListsContainer changeObjSelected={changeObjSelected}>
+        <ListsContainer>
           {lists.map((list) => (
             <ListItem
               key={list.name}
@@ -44,7 +45,7 @@ function Search({
               nTasks={list.nTasks}
               nTasksCompleted={list.nTasksCompleted}
               description={list.description}
-              openInfo={() => changeObjSelected(list.name, 'list')}
+              openInfo={() => changeListSelected(list.name)}
             />
           ))}
         </ListsContainer>
@@ -62,7 +63,7 @@ function Search({
               notes={task.notes}
               onCompleteClick={() => onCompleteClick(task.name)}
               onImportantClick={() => onImportantClick(task.name)}
-              openInfo={() => changeObjSelected(task.name, 'task')}
+              openInfo={() => changeTaskSelected(task.name)}
             />
           ))}
         </TaskList>

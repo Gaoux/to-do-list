@@ -5,55 +5,10 @@ import { MyLists } from './pages/MyLists';
 import { Important } from './pages/Important';
 import { MyAccount } from './pages/MyAccount';
 import { Search } from './pages/Search';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import TaskSidePanel from './components/TaskSidePanel';
-import ListSidePanel from './components/ListSidePanel';
-
-const defaultLists = [
-  {
-    name: 'Work',
-    nTasks: 2,
-    nTasksCompleted: 1,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'House',
-    nTasks: 5,
-    nTasksCompleted: 4,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'Whatever',
-    nTasks: 12,
-    nTasksCompleted: 12,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'House 2',
-    nTasks: 10,
-    nTasksCompleted: 2,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'Lala',
-    nTasks: 9,
-    nTasksCompleted: 4,
-    description: '',
-    tasks: [],
-  },
-  {
-    name: 'Work 2',
-    nTasks: 2,
-    nTasksCompleted: 1,
-    description: '',
-    tasks: [],
-  },
-];
+import { ListPage } from './pages/ListPage';
 
 const defaultTasks = [
   {
@@ -104,7 +59,53 @@ const defaultTasks = [
   },
 ];
 
+const defaultLists = [
+  {
+    name: 'Work',
+    nTasks: 2,
+    nTasksCompleted: 1,
+    description: '',
+    tasks: defaultTasks,
+  },
+  {
+    name: 'House',
+    nTasks: 5,
+    nTasksCompleted: 4,
+    description: '',
+    tasks: defaultTasks,
+  },
+  {
+    name: 'Whatever',
+    nTasks: 12,
+    nTasksCompleted: 12,
+    description: '',
+    tasks: [],
+  },
+  {
+    name: 'House 2',
+    nTasks: 10,
+    nTasksCompleted: 2,
+    description: '',
+    tasks: [],
+  },
+  {
+    name: 'Lala',
+    nTasks: 9,
+    nTasksCompleted: 4,
+    description: '',
+    tasks: [],
+  },
+  {
+    name: 'Work 2',
+    nTasks: 2,
+    nTasksCompleted: 1,
+    description: '',
+    tasks: [],
+  },
+];
+
 function App() {
+  const navigate = useNavigate();
   const location = useLocation();
   //Lists
   const [lists, setLists] = useState(defaultLists);
@@ -112,9 +113,9 @@ function App() {
   const [tasks, setTasks] = useState(defaultTasks);
   //SidePanel
   const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
-  const [showListSidePanel, setShowListSidePanel] = useState(true);
-
-  const [objSelected, setObjSelected] = useState({});
+  //Obj selected
+  const [taskSelected, setTaskSelected] = useState({});
+  const [listSelected, setListSelected] = useState({});
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -158,35 +159,27 @@ function App() {
     newTasks.splice(index, 1);
     setTasks(newTasks);
   };
-  //Edit list
-  const editList = (editedList) => {
-    const newLists = [...lists];
-    const index = newLists.findIndex((list) => list.name === editedList.name);
-    newLists[index] = editedList;
-    setLists(newLists);
-  };
   //Delete list
-  const deleteList = (name) => {
+  const deleteList = (listName) => {
+    const newTasks = tasks.filter((task) => task.listName !== listName);
+    setTasks(newTasks);
     const newLists = [...lists];
-    const index = newLists.findIndex((list) => list.name === name);
+    const index = newLists.findIndex((list) => list.name === listName);
     newLists.splice(index, 1);
     setLists(newLists);
   };
-  //Open Side bar on Click of Obj
-  const openSideBar = (type) => {
-    if (type === 'task') setShowTaskSidePanel(true);
-    else setShowListSidePanel(true);
+  //ChangeTaskSelected
+  const changeTaskSelected = (name) => {
+    const index = tasks.findIndex((task) => task.name === name);
+    setTaskSelected(tasks[index]);
+    setShowTaskSidePanel(true);
   };
-  //ChangeObjSelected
-  const changeObjSelected = (name, type) => {
-    if (type === 'task') {
-      const index = tasks.findIndex((task) => task.name === name);
-      setObjSelected(tasks[index]);
-    } else {
-      const index = lists.findIndex((list) => list.name === name);
-      setObjSelected(lists[index]);
-    }
-    openSideBar(type);
+  //ChangeListSelected
+  const changeListSelected = (name) => {
+    setActiveSearch(false);
+    const index = lists.findIndex((list) => list.name === name);
+    setListSelected(lists[index]);
+    navigate('/list-info');
   };
   //Navbar Title
   const changeTitle = () => {
@@ -205,6 +198,9 @@ function App() {
 
       case '/search':
         return '';
+
+      case '/list-info':
+        return 'List';
 
       default:
         return 'Home';
@@ -231,7 +227,8 @@ function App() {
               tasks={tasks}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
-              changeObjSelected={changeObjSelected}
+              changeTaskSelected={changeTaskSelected}
+              changeListSelected={changeListSelected}
             />
           }
         />
@@ -243,7 +240,7 @@ function App() {
               tasks={tasks}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
-              changeObjSelected={changeObjSelected}
+              changeTaskSelected={changeTaskSelected}
             />
           }
         />
@@ -255,7 +252,7 @@ function App() {
               setTasks={setTasks}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
-              changeObjSelected={changeObjSelected}
+              changeTaskSelected={changeTaskSelected}
             />
           }
         />
@@ -266,7 +263,7 @@ function App() {
               lists={lists}
               setLists={setLists}
               tasks={tasks}
-              changeObjSelected={changeObjSelected}
+              changeListSelected={changeListSelected}
             />
           }
         />
@@ -285,31 +282,34 @@ function App() {
               tasksLenght={searchTasks.length}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
-              changeObjSelected={changeObjSelected}
+              changeTaskSelected={changeTaskSelected}
+              changeListSelected={changeListSelected}
+            />
+          }
+        />
+        <Route
+          path="/list-info"
+          element={
+            <ListPage
+              lists={lists}
+              list={listSelected}
+              deleteList={deleteList}
+              onCompleteClick={completeTask}
+              onImportantClick={makeImportantTask}
+              changeTaskSelected={changeTaskSelected}
+              onDelete={() => deleteList(listSelected.name)}
             />
           }
         />
       </Routes>
-      {showTaskSidePanel && tasks.includes(objSelected) ? (
+      {showTaskSidePanel && tasks.includes(taskSelected) ? (
         <TaskSidePanel
           lists={lists}
-          obj={objSelected}
+          obj={taskSelected}
           show={showTaskSidePanel}
           setShow={setShowTaskSidePanel}
           onEdit={editTask}
-          onDelete={() => deleteTask(objSelected.name)}
-        />
-      ) : null}
-      {showListSidePanel && lists.includes(objSelected) ? (
-        <ListSidePanel
-          obj={objSelected}
-          show={showListSidePanel}
-          setShow={setShowListSidePanel}
-          onEdit={editList}
-          onDelete={() => deleteList(objSelected.name)}
-          onCompleteClick={completeTask}
-          onImportantClick={makeImportantTask}
-          changeObjSelected={changeObjSelected}
+          onDelete={() => deleteTask(taskSelected.name)}
         />
       ) : null}
     </>

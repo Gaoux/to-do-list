@@ -6,7 +6,7 @@ function Important({
   tasks,
   onCompleteClick,
   onImportantClick,
-  changeObjSelected,
+  changeTaskSelected,
 }) {
   return (
     <ImportantTaskList onCompleteClick={onCompleteClick}>
@@ -21,7 +21,7 @@ function Important({
           notes={task.notes}
           onCompleteClick={() => onCompleteClick(task.name)}
           onImportantClick={() => onImportantClick(task.name)}
-          openInfo={() => changeObjSelected(task.name, 'task')}
+          openInfo={() => changeTaskSelected(task.name)}
         />
       ))}
     </ImportantTaskList>
