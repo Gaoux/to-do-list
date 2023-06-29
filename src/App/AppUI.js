@@ -9,7 +9,7 @@ import { ListPage } from '../pages/ListPage';
 import TaskSidePanel from '../components/TaskSidePanel';
 import { Loading } from '../components/Loading';
 import { Routes, Route } from 'react-router-dom';
-import { TodoContext } from '../ToDoContext';
+import { TodoContext } from '../TodoContext';
 import React from 'react';
 
 function AppUI() {
