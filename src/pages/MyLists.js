@@ -3,8 +3,9 @@ import { AddButton } from '../components/AddButton';
 import { AddListModal } from '../components/AddListModal';
 import { ListItem } from '../components/ListItem';
 
-function MyLists({ lists, setLists, changeListSelected }) {
+function MyLists({ lists, changeListSelected }) {
   const [activeAddList, setActiveAddList] = useState(false);
+
   return (
     <>
       <div className="list-container lists-container-lists-page">
@@ -17,7 +18,6 @@ function MyLists({ lists, setLists, changeListSelected }) {
                 name={list.name}
                 nTasks={list.nTasks}
                 nTasksCompleted={list.nTasksCompleted}
-                description={list.description}
                 openInfo={() => changeListSelected(list.name)}
               />
             ))}
@@ -25,12 +25,7 @@ function MyLists({ lists, setLists, changeListSelected }) {
         </div>
       </div>
       <AddButton active={activeAddList} setActive={setActiveAddList} />
-      <AddListModal
-        lists={lists}
-        setLists={setLists}
-        show={activeAddList}
-        setShow={setActiveAddList}
-      />
+      <AddListModal show={activeAddList} setShow={setActiveAddList} />
     </>
   );
 }

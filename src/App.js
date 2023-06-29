@@ -46,7 +46,7 @@ const defaultTasks = [
     date: '',
     repeat: 'Everyday',
     notes: '',
-    listName: '',
+    listName: 'None',
   },
   {
     name: 'Prepare dinner',
@@ -62,34 +62,57 @@ const defaultTasks = [
 const defaultLists = [
   {
     name: 'Work',
-    nTasks: 2,
-    nTasksCompleted: 1,
-    description: '',
+    nTasks: 1,
+    nTasksCompleted: 0,
     tasks: ['Finish this React App'],
   },
   {
     name: 'House',
-    nTasks: 5,
-    nTasksCompleted: 4,
-    description: '',
+    nTasks: 1,
+    nTasksCompleted: 1,
     tasks: ['Prepare dinner'],
   },
   {
     name: 'Whatever',
-    nTasks: 12,
-    nTasksCompleted: 12,
-    description: '',
+    nTasks: 2,
+    nTasksCompleted: 1,
     tasks: ['Cut hair with barber', 'Drink water'],
   },
 ];
 
+// localStorage.setItem('TASKS_V1', JSON.stringify(defaultTasks));
+// localStorage.setItem('LISTS_V1', JSON.stringify(defaultLists));
+
+// localStorage.removeItem('TASKS_V1');
+// localStorage.removeItem('LISTS_V1');
+
+function useLocalStorage(itemName, initialValue) {
+  const localStorageItem = window.localStorage.getItem(itemName);
+
+  let parsedItem;
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify([]));
+    parsedItem = initialValue;
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+  const [item, setItem] = useState(parsedItem);
+
+  const saveItem = (newItem) => {
+    localStorage.setItem(itemName, JSON.stringify(newItem));
+    setItem(newItem);
+  };
+
+  return [item, saveItem];
+}
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  //Lists
-  const [lists, setLists] = useState(defaultLists);
   //Tasks
-  const [tasks, setTasks] = useState(defaultTasks);
+  const [tasks, saveTasks] = useLocalStorage('TASKS_V1', defaultTasks);
+  //Lists
+  const [lists, saveLists] = useLocalStorage('LISTS_V1', defaultLists);
   //SidePanel
   const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
   //Obj selected
@@ -110,6 +133,7 @@ function App() {
     const search = searchValue.toLowerCase();
     return listName.includes(search);
   });
+
   //Update lists
   const updateListTask = (previousListName, newListName, taskName) => {
     const newLists = [...lists];
@@ -117,44 +141,58 @@ function App() {
     const indexOfPrevious = newLists.findIndex(
       (list) => list.name === previousListName
     );
-    if (indexOfPrevious > -1)
+    const taskIndex = tasks.findIndex((task) => task.name === taskName);
+    if (indexOfPrevious > -1) {
       newLists[indexOfPrevious].tasks = newLists[indexOfPrevious].tasks.filter(
         (task) => task !== taskName
       );
-
+      newLists[indexOfPrevious].nTasks--;
+      if (tasks[taskIndex].completed === true) {
+        newLists[indexOfPrevious].nTasksCompleted--;
+      }
+    }
     //Add task to new list if added to one
     const index = newLists.findIndex((list) => list.name === newListName);
-    if (index > -1) newLists[index].tasks.push(taskName);
+    if (index > -1) {
+      newLists[index].tasks.push(taskName);
 
-    setLists(newLists);
+      newLists[index].nTasks++;
+      if (tasks[taskIndex].completed === true) {
+        newLists[index].nTasksCompleted++;
+      }
+    }
+    saveLists(newLists);
   };
   //Complete or uncomplete tasks
   const completeTask = (name) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks[index].completed = !newTasks[index].completed;
-    setTasks(newTasks);
+    if (newTasks[index].listName !== 'None') {
+      const newLists = [...lists];
+      const listIndex = newLists.findIndex(
+        (list) => list.name === newTasks[index].listName
+      );
+      newTasks[index].completed
+        ? newLists[listIndex].nTasksCompleted++
+        : newLists[listIndex].nTasksCompleted--;
+      saveLists(newLists);
+    }
+    saveTasks(newTasks);
   };
   //Make tasks Important or not
   const makeImportantTask = (name) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks[index].important = !newTasks[index].important;
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
   //Edit task
   const editTask = (editedTask) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === editedTask.name);
-    if (newTasks[index].listName !== editedTask.listName) {
-      updateListTask(
-        newTasks[index].listName,
-        editedTask.listName,
-        editedTask.name
-      );
-    }
     newTasks[index] = editedTask;
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
   //Delete task
   const deleteTask = (name) => {
@@ -172,19 +210,24 @@ function App() {
         (taskName) => taskName === name
       );
       newLists.splice(indexOfTask, 1);
-      setLists(newLists);
+      newLists[listIndex].nTasks = newLists[listIndex].tasks.length;
+      if (newTasks[index].completed === true) {
+        newLists[listIndex].nTasksCompleted =
+          newLists[listIndex].nTasksCompleted - 1;
+      }
+      saveLists(newLists);
     }
     newTasks.splice(index, 1);
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
   //Delete list
   const deleteList = (listName) => {
     const newTasks = tasks.filter((task) => task.listName !== listName);
-    setTasks(newTasks);
+    saveTasks(newTasks);
     const newLists = [...lists];
     const index = newLists.findIndex((list) => list.name === listName);
     newLists.splice(index, 1);
-    setLists(newLists);
+    saveLists(newLists);
   };
   //ChangeTaskSelected
   const changeTaskSelected = (name) => {
@@ -241,7 +284,6 @@ function App() {
           element={
             <Home
               lists={lists}
-              setLists={setLists}
               tasks={tasks}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
@@ -267,7 +309,6 @@ function App() {
           element={
             <Important
               tasks={tasks}
-              setTasks={setTasks}
               onCompleteClick={completeTask}
               onImportantClick={makeImportantTask}
               changeTaskSelected={changeTaskSelected}
@@ -279,16 +320,12 @@ function App() {
           element={
             <MyLists
               lists={lists}
-              setLists={setLists}
               tasks={tasks}
               changeListSelected={changeListSelected}
             />
           }
         />
-        <Route
-          path="/account"
-          element={<MyAccount tasks={tasks} setTasks={setTasks} />}
-        />
+        <Route path="/account" element={<MyAccount tasks={tasks} />} />
         <Route
           path="/search"
           element={
@@ -324,6 +361,7 @@ function App() {
       {showTaskSidePanel && tasks.includes(taskSelected) ? (
         <TaskSidePanel
           lists={lists}
+          updateListTask={updateListTask}
           obj={taskSelected}
           show={showTaskSidePanel}
           setShow={setShowTaskSidePanel}

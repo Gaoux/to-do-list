@@ -15,6 +15,7 @@ function TaskSidePanel(props) {
     props.onEdit(obj);
   };
   const handleListNameChange = (e) => {
+    props.updateListTask(obj.listName, e.target.value, obj.name);
     obj.listName = e.target.value;
     props.onEdit(obj);
   };

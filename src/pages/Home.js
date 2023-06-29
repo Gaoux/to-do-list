@@ -26,7 +26,6 @@ function Home({
             name={list.name}
             nTasks={list.nTasks}
             nTasksCompleted={list.nTasksCompleted}
-            description={list.description}
             openInfo={() => changeListSelected(list.name)}
           />
         ))}

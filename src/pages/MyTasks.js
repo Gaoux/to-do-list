@@ -6,7 +6,6 @@ import { AddTaskModal } from '../components/AddTaskModal';
 
 function MyTasks({
   tasks,
-  setTasks,
   onCompleteClick,
   onImportantClick,
   changeTaskSelected,
@@ -32,12 +31,7 @@ function MyTasks({
         ))}
       </TaskList>
       <AddButton active={activeAddTask} setActive={setActiveAddTask} />
-      <AddTaskModal
-        tasks={tasks}
-        setTasks={setTasks}
-        show={activeAddTask}
-        setShow={setActiveAddTask}
-      />
+      <AddTaskModal show={activeAddTask} setShow={setActiveAddTask} />
     </>
   );
 }

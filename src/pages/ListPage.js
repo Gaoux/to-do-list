@@ -51,11 +51,7 @@ function ListPage({
         ))}
       </TaskList>
       <AddButton active={activeAddTask} setActive={setActiveAddTask} />
-      <AddTaskModal
-        tasks={list.tasks}
-        show={activeAddTask}
-        setShow={setActiveAddTask}
-      />
+      <AddTaskModal show={activeAddTask} setShow={setActiveAddTask} />
     </div>
   );
 }

@@ -1,11 +1,15 @@
 import React from 'react';
 
 function ListItem(props) {
-  let percentageOfTaskCompleted = (
-    (props.nTasksCompleted / props.nTasks) *
-    100
-  ).toFixed();
-
+  let percentageOfTaskCompleted;
+  if (props.nTasks === 0) {
+    percentageOfTaskCompleted = 0;
+  } else {
+    percentageOfTaskCompleted = (
+      (props.nTasksCompleted / props.nTasks) *
+      100
+    ).toFixed();
+  }
   const setBarColor = (percentage) => {
     if (percentage < 25) {
       return '#d2122e';
