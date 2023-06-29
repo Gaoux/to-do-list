@@ -99,29 +99,37 @@ function AddTaskModal(props) {
               >
                 Repeat *
               </label>
-              <div className="flex justify-left">
-                <div className="option my-2 ml-2 mr-10">
+              <div className="radio-button-container flex justify-left">
+                <div className="radio-button my-2 ml-2 mr-10">
                   <input
-                    className="cursor-pointer"
+                    className="radio-button__input"
                     type="radio"
                     id="one-time"
                     name="repeat"
                     defaultChecked
                     value="one time"
                   />
-                  <label className="ml-2 cursor-pointer" htmlFor="one-time">
+                  <label
+                    className="radio-button__label ml-2 cursor-pointer"
+                    htmlFor="one-time"
+                  >
+                    <span class="radio-button__custom"></span>
                     One Time
                   </label>
                 </div>
-                <div className="option my-2 mr-6">
+                <div className="radio-button my-2 mr-6">
                   <input
-                    className="cursor-pointer"
+                    className="radio-button__input"
                     type="radio"
                     id="everyday"
                     name="repeat"
                     value="eveyday"
                   />
-                  <label className="ml-2 cursor-pointer" htmlFor="everyday">
+                  <label
+                    className="radio-button__label ml-2 cursor-pointer"
+                    htmlFor="everyday"
+                  >
+                    <span class="radio-button__custom"></span>
                     Everyday
                   </label>
                 </div>

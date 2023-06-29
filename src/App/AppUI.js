@@ -7,10 +7,15 @@ import { MyAccount } from '../pages/MyAccount';
 import { Search } from '../pages/SearchPage';
 import { ListPage } from '../pages/ListPage';
 import TaskSidePanel from '../components/TaskSidePanel';
+import { Loading } from '../components/Loading';
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
 
 function AppUI({
+  loadingTasks,
+  loadingLists,
+  errorTasks,
+  errorLists,
   tasks,
   lists,
   showTaskSidePanel,
@@ -42,86 +47,92 @@ function AppUI({
         setSearchValue={setSearchValue}
         title={pageTitle}
       />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              lists={lists}
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route
-          path="/tasks"
-          element={
-            <MyTasks
-              list={lists}
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-            />
-          }
-        />
-        <Route
-          path="/important"
-          element={
-            <Important
-              tasks={tasks}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-            />
-          }
-        />
-        <Route
-          path="/lists"
-          element={
-            <MyLists
-              lists={lists}
-              tasks={tasks}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route path="/account" element={<MyAccount tasks={tasks} />} />
-        <Route
-          path="/search"
-          element={
-            <Search
-              searchValue={searchValue}
-              lists={searchLists}
-              tasks={searchTasks}
-              listsLenght={searchLists.length}
-              tasksLenght={searchTasks.length}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              changeListSelected={changeListSelected}
-            />
-          }
-        />
-        <Route
-          path="/list-info"
-          element={
-            <ListPage
-              lists={lists}
-              tasks={tasks}
-              list={listSelected}
-              deleteList={deleteList}
-              onCompleteClick={completeTask}
-              onImportantClick={makeImportantTask}
-              changeTaskSelected={changeTaskSelected}
-              onDelete={() => deleteList(listSelected.name)}
-            />
-          }
-        />
-      </Routes>
+      {(loadingTasks || loadingLists) && <Loading />}
+      {(errorTasks || errorLists) && <p>Error</p>}
+      {!loadingTasks && tasks.length === 0 && <p>Create your first tasks</p>}
+      {!loadingTasks && !loadingLists && (
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                lists={lists}
+                tasks={tasks}
+                onCompleteClick={completeTask}
+                onImportantClick={makeImportantTask}
+                changeTaskSelected={changeTaskSelected}
+                changeListSelected={changeListSelected}
+              />
+            }
+          />
+          <Route
+            path="/tasks"
+            element={
+              <MyTasks
+                list={lists}
+                tasks={tasks}
+                onCompleteClick={completeTask}
+                onImportantClick={makeImportantTask}
+                changeTaskSelected={changeTaskSelected}
+              />
+            }
+          />
+          <Route
+            path="/important"
+            element={
+              <Important
+                tasks={tasks}
+                onCompleteClick={completeTask}
+                onImportantClick={makeImportantTask}
+                changeTaskSelected={changeTaskSelected}
+              />
+            }
+          />
+          <Route
+            path="/lists"
+            element={
+              <MyLists
+                lists={lists}
+                tasks={tasks}
+                changeListSelected={changeListSelected}
+              />
+            }
+          />
+          <Route path="/account" element={<MyAccount tasks={tasks} />} />
+          <Route
+            path="/search"
+            element={
+              <Search
+                searchValue={searchValue}
+                lists={searchLists}
+                tasks={searchTasks}
+                listsLenght={searchLists.length}
+                tasksLenght={searchTasks.length}
+                onCompleteClick={completeTask}
+                onImportantClick={makeImportantTask}
+                changeTaskSelected={changeTaskSelected}
+                changeListSelected={changeListSelected}
+              />
+            }
+          />
+          <Route
+            path="/list-info"
+            element={
+              <ListPage
+                lists={lists}
+                tasks={tasks}
+                list={listSelected}
+                deleteList={deleteList}
+                onCompleteClick={completeTask}
+                onImportantClick={makeImportantTask}
+                changeTaskSelected={changeTaskSelected}
+                onDelete={() => deleteList(listSelected.name)}
+              />
+            }
+          />
+        </Routes>
+      )}
+
       {showTaskSidePanel && tasks.includes(taskSelected) ? (
         <TaskSidePanel
           lists={lists}

@@ -3,6 +3,9 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { AppUI } from './AppUI';
 import React, { useState, useEffect } from 'react';
 
+// localStorage.removeItem('TASKS_V1');
+// localStorage.removeItem('LISTS_V1');
+
 const defaultTasks = [
   {
     name: 'Finish this React App',
@@ -85,16 +88,23 @@ const defaultLists = [
 // localStorage.setItem('TASKS_V1', JSON.stringify(defaultTasks));
 // localStorage.setItem('LISTS_V1', JSON.stringify(defaultLists));
 
-// localStorage.removeItem('TASKS_V1');
-// localStorage.removeItem('LISTS_V1');
-
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
   //Tasks
-  const [tasks, saveTasks] = useLocalStorage('TASKS_V1', defaultTasks);
+  const {
+    item: tasks,
+    saveItem: saveTasks,
+    loading: loadingTasks,
+    error: errorTasks,
+  } = useLocalStorage('TASKS_V1', defaultTasks);
   //Lists
-  const [lists, saveLists] = useLocalStorage('LISTS_V1', defaultLists);
+  const {
+    item: lists,
+    saveItem: saveLists,
+    loading: loadingLists,
+    error: errorLists,
+  } = useLocalStorage('LISTS_V1', defaultLists);
   //Navbar title
   const [pageTitle, setPageTitle] = useState('Home');
   //SidePanel
@@ -259,6 +269,10 @@ function App() {
 
   return (
     <AppUI
+      loadingTasks={loadingTasks}
+      loadingLists={loadingLists}
+      errorTasks={errorTasks}
+      errorLists={errorLists}
       tasks={tasks}
       lists={lists}
       showTaskSidePanel={showTaskSidePanel}
