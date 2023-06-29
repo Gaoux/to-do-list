@@ -6,7 +6,7 @@ import { Important } from './pages/Important';
 import { MyAccount } from './pages/MyAccount';
 import { Search } from './pages/Search';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TaskSidePanel from './components/TaskSidePanel';
 import { ListPage } from './pages/ListPage';
 
@@ -65,21 +65,60 @@ const defaultLists = [
     nTasks: 2,
     nTasksCompleted: 1,
     description: '',
-    tasks: [],
+    tasks: [
+      {
+        name: 'Finish this React App',
+        completed: false,
+        important: true,
+        date: '2023-06-26',
+        repeat: 'Everyday',
+        notes: 'End this To Do App',
+        listName: 'Work',
+      },
+    ],
   },
   {
     name: 'House',
     nTasks: 5,
     nTasksCompleted: 4,
     description: '',
-    tasks: [],
+    tasks: [
+      {
+        name: 'Prepare dinner',
+        completed: true,
+        important: false,
+        date: '',
+        repeat: 'One time',
+        notes: '',
+        listName: 'House',
+      },
+    ],
   },
   {
     name: 'Whatever',
     nTasks: 12,
     nTasksCompleted: 12,
     description: '',
-    tasks: [],
+    tasks: [
+      {
+        name: 'Cut hair with barber',
+        completed: false,
+        important: false,
+        date: '',
+        repeat: 'One time',
+        notes: '',
+        listName: 'Whatever',
+      },
+      {
+        name: 'Drink water',
+        completed: true,
+        important: true,
+        repeat: 'Everyday',
+        date: '',
+        notes: '',
+        listName: 'Whatever',
+      },
+    ],
   },
 ];
 
@@ -99,17 +138,6 @@ function App() {
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  useEffect(() => {
-    const newLists = [...lists];
-    for (const i in newLists) {
-      const newListTasks = tasks.filter(
-        (task) => task.listName === newLists[i].name
-      );
-      newLists[i].tasks = newListTasks;
-    }
-    setLists(newLists);
-  });
-
   //Search lists
   const searchTasks = tasks.filter((task) => {
     const taskName = task.name.toLowerCase();
@@ -121,6 +149,17 @@ function App() {
     const search = searchValue.toLowerCase();
     return listName.includes(search);
   });
+  //Update lists
+  const updateLists = () => {
+    const newLists = [...lists];
+    for (const i in newLists) {
+      const newListTasks = tasks.filter(
+        (task) => task.listName === newLists[i].name
+      );
+      newLists[i].tasks = newListTasks;
+    }
+    setLists(newLists);
+  };
   //Complete or uncomplete tasks
   const completeTask = (name) => {
     const newTasks = [...tasks];
@@ -141,6 +180,7 @@ function App() {
     const index = newTasks.findIndex((task) => task.name === editTask.name);
     newTasks[index] = editedTask;
     setTasks(newTasks);
+    updateLists();
   };
   //Delete task
   const deleteTask = (name) => {
@@ -148,6 +188,7 @@ function App() {
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks.splice(index, 1);
     setTasks(newTasks);
+    updateLists();
   };
   //Delete list
   const deleteList = (listName) => {
