@@ -16,7 +16,7 @@ This repository contains a simple To Do List application built with React.js.
 - Users can create, update, and delete lists.
 - Lists are groups of related tasks that can be categorized by a specific theme or purpose.
 - Users can add tasks to a particular list.
-- Each list includes a title and their group of tasks.
+- Each list includes a title, a description, and their group of tasks.
 - Users can view all the tasks associated with a specific list.
 
 ## Requirements

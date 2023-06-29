@@ -6,7 +6,7 @@
     display: flex;
     font-size: 40px;
     margin: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 15px;
 
     button.delete {
       height: 40px;
@@ -20,5 +20,11 @@
       transition: transform 0.2s;
       cursor: pointer;
     }
+  }
+  .list-description {
+    color: $dark-grey;
+    font-size: $md;
+    margin-left: 40px;
+    margin-bottom: 60px;
   }
 }

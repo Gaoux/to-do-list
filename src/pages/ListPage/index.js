@@ -34,6 +34,9 @@ function ListPage({
           Delete list <FontAwesomeIcon className="ml-2" icon={faTrash} />
         </button>
       </div>
+      <div className="list-description">
+        <p>{list.description}</p>
+      </div>
       <TaskList onCompleteClick={onCompleteClick}>
         {listTasks.map((task) => (
           <TaskItem
