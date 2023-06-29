@@ -1,9 +1,9 @@
-import { DailyTasks } from '../components/DailyTasks';
-import { TaskItem } from '../components/TaskItem';
-import { AddButton } from '../components/AddButton';
-import { AddTaskModal } from '../components/AddTaskModal';
-import { ListsContainer } from '../components/ListsContainer';
-import { ListItem } from '../components/ListItem';
+import { DailyTasks } from './DailyTasks';
+import { TaskItem } from '../../components/TaskItem';
+import { AddButton } from '../../components/ui/AddButton';
+import { AddTaskModal } from '../../components/ui/AddTaskModal';
+import { ListsContainer } from '../../components/ListsContainer';
+import { ListItem } from '../../components/ListItem';
 import React, { useState } from 'react';
 
 function Home({

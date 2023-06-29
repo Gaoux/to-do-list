@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImportantTaskList } from '../components/ImportantTaskList';
-import { TaskItem } from '../components/TaskItem';
+import { ImportantTaskList } from './ImportantTaskList';
+import { TaskItem } from '../../components/TaskItem';
 
 function Important({
   tasks,

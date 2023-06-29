@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { TaskList } from '../components/TaskList';
-import { TaskItem } from '../components/TaskItem';
-import { AddButton } from '../components/AddButton';
-import { AddTaskModal } from '../components/AddTaskModal';
+import { TaskList } from '../../components/TaskList';
+import { TaskItem } from '../../components/TaskItem';
+import { AddButton } from '../../components/ui/AddButton';
+import { AddTaskModal } from '../../components/ui/AddTaskModal';
 
 function MyTasks({
   tasks,

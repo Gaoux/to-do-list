@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { TaskList } from '../components/TaskList';
-import { TaskItem } from '../components/TaskItem';
-import { AddButton } from '../components/AddButton';
-import { AddTaskModal } from '../components/AddTaskModal';
+import { TaskList } from '../../components/TaskList';
+import { TaskItem } from '../../components/TaskItem';
+import { AddButton } from '../../components/ui/AddButton';
+import { AddTaskModal } from '../../components/ui/AddTaskModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';

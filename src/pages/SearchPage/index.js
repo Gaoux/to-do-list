@@ -1,9 +1,9 @@
 import React from 'react';
-import { TaskList } from '../components/TaskList';
-import { TaskItem } from '../components/TaskItem';
-import { ListsContainer } from '../components/ListsContainer';
-import { ListItem } from '../components/ListItem';
-import SearchIcon from '../components/SearchIcon';
+import { TaskList } from '../../components/TaskList';
+import { TaskItem } from '../../components/TaskItem';
+import { ListsContainer } from '../../components/ListsContainer';
+import { ListItem } from '../../components/ListItem';
+import SearchIcon from './SearchIcon';
 
 function Search({
   searchValue,

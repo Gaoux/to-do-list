@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AddButton } from '../components/AddButton';
-import { AddListModal } from '../components/AddListModal';
-import { ListItem } from '../components/ListItem';
+import { AddButton } from '../../components/ui/AddButton';
+import { AddListModal } from './AddListModal';
+import { ListItem } from '../../components/ListItem';
 
 function MyLists({ lists, changeListSelected }) {
   const [activeAddList, setActiveAddList] = useState(false);

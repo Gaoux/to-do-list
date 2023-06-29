@@ -1,14 +1,15 @@
-import { Navbar } from './components/Navbar';
-import { Home } from './pages/Home';
-import { MyTasks } from './pages/MyTasks';
-import { MyLists } from './pages/MyLists';
-import { Important } from './pages/Important';
-import { MyAccount } from './pages/MyAccount';
-import { Search } from './pages/Search';
+import { Navbar } from '../components/layout/Navbar';
+import { Home } from '../pages/Home';
+import { MyTasks } from '../pages/MyTasks';
+import { MyLists } from '../pages/MyLists';
+import { Important } from '../pages/Important';
+import { MyAccount } from '../pages/MyAccount';
+import { Search } from '../pages/SearchPage';
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import TaskSidePanel from '../components/TaskSidePanel';
+import { ListPage } from '../pages/ListPage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import React, { useState } from 'react';
-import TaskSidePanel from './components/TaskSidePanel';
-import { ListPage } from './pages/ListPage';
 
 const defaultTasks = [
   {
@@ -85,26 +86,6 @@ const defaultLists = [
 
 // localStorage.removeItem('TASKS_V1');
 // localStorage.removeItem('LISTS_V1');
-
-function useLocalStorage(itemName, initialValue) {
-  const localStorageItem = window.localStorage.getItem(itemName);
-
-  let parsedItem;
-  if (!localStorageItem) {
-    localStorage.setItem(itemName, JSON.stringify([]));
-    parsedItem = initialValue;
-  } else {
-    parsedItem = JSON.parse(localStorageItem);
-  }
-  const [item, setItem] = useState(parsedItem);
-
-  const saveItem = (newItem) => {
-    localStorage.setItem(itemName, JSON.stringify(newItem));
-    setItem(newItem);
-  };
-
-  return [item, saveItem];
-}
 
 function App() {
   const navigate = useNavigate();
