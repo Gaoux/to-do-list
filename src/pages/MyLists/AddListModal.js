@@ -53,13 +53,13 @@ function AddListModal(props) {
                 placeholder="Say something about the list"
               />
             </div>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
+              form="addtask"
+            >
+              add list
+            </button>
           </form>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
-            form="addtask"
-          >
-            add list
-          </button>
         </Modal.Body>
         {/* <Modal.Footer className="add-task-modal__footer"></Modal.Footer> */}
       </Modal>

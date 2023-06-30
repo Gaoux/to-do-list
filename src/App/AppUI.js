@@ -42,9 +42,7 @@ function AppUI() {
         </Routes>
       )}
 
-      {showTaskSidePanel && tasks.includes(taskSelected) ? (
-        <TaskSidePanel />
-      ) : null}
+      {showTaskSidePanel && tasks.includes(taskSelected) && <TaskSidePanel />}
     </>
   );
 }

@@ -1,15 +1,23 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-.add-task-btn {
+.add-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 5px 15px rgba(39, 171, 248, 0.4);
   @include add-btn;
 }
 
-.add-task-btn--active {
+.add-btn--active {
   background-color: $ajax-red;
+  width: 60px;
+  height: 60px;
   transform: rotate(45deg);
+  box-shadow: 0 5px 15px rgba(248, 39, 39, 0.4);
+  .line {
+    width: 25px;
+    height: 4.5px;
+  }
 }
