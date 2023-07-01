@@ -17,8 +17,10 @@ function AppUI() {
     tasks,
     loadingTasks,
     loadingLists,
+    loadingListSelected,
     // errorTasks,
     // errorLists,
+    //errorListSelected,
     showTaskSidePanel,
     taskSelected,
   } = useContext(TodoContext);
@@ -38,7 +40,11 @@ function AppUI() {
           <Route path="/lists" element={<MyLists />} />
           <Route path="/account" element={<MyAccount />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/list-info" element={<ListPage />} />
+          {loadingListSelected ? (
+            <Loading />
+          ) : (
+            <Route path="/list-info" element={<ListPage />} />
+          )}
         </Routes>
       )}
 

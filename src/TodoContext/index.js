@@ -109,7 +109,12 @@ function TodoProvider({ children }) {
   const [showTaskSidePanel, setShowTaskSidePanel] = useState(false);
   //Obj selected
   const [taskSelected, setTaskSelected] = useState({});
-  const [listSelected, setListSelected] = useState({});
+  const {
+    item: listSelected,
+    saveItem: saveListSelected,
+    loading: loadingListSelected,
+    error: errorListSelected,
+  } = useLocalStorage('LISTSELECTED_V1', {});
   //Search
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -280,7 +285,7 @@ function TodoProvider({ children }) {
   const changeListSelected = (name) => {
     setActiveSearch(false);
     const index = lists.findIndex((list) => list.name === name);
-    setListSelected(lists[index]);
+    saveListSelected(lists[index]);
     navigate('/list-info');
   };
 
@@ -290,8 +295,10 @@ function TodoProvider({ children }) {
         location,
         loadingTasks,
         loadingLists,
+        loadingListSelected,
         errorTasks,
         errorLists,
+        errorListSelected,
         tasks,
         lists,
         showTaskSidePanel,
