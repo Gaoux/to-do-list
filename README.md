@@ -22,6 +22,33 @@ The repository is currently deployed and accessible [here](https://gaoux.github.
 - Each list includes a title, a description, and their group of tasks.
 - Users can view all the tasks associated with a specific list.
 
+### Home Page
+
+- The home page displays an overview of the user tasks and lists.
+- Displays the today's tasks, which are the tasks that are due today or repeat every day.
+- Also displays the lists, allowing users to have a comprehensive view of their tasks and lists in one place.
+- Users can easily see the tasks that require immediate attention and are relevant for the current day.
+- This feature provides a quick overview of the tasks that need to be completed or worked on without navigating to individual lists.
+
+### Tasks Page
+
+- The tasks page displays all tasks, providing an overview of all created tasks.
+- Users can see the title, due date, notes, importance, and status of each task.
+- This page allows users to manage and update tasks efficiently.
+
+### Important Page
+
+- The important page displays all tasks that are marked as important.
+- Users can easily identify and focus on the tasks that require special attention or priority.
+- This feature helps users manage their important tasks effectively.
+
+### Lists Page
+
+- The lists page displays all created lists.
+- Users can view the title and description of each list.
+- This page provides a convenient way to access and navigate through different lists.
+- Users can select a specific list to view all the tasks associated with it.
+
 ## Requirements
 
 - Node.js 16+
