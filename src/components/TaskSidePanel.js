@@ -85,7 +85,7 @@ function TaskSidePanel() {
             value={taskSelected.listName}
             onChange={handleListNameChange}
           >
-            <option value="None">None</option>
+            <option value=""></option>
             {lists.map((list) => (
               <option key={list.name} value={list.name}>
                 {' '}

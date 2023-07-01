@@ -7,7 +7,7 @@ const TodoContext = createContext();
 const defaultTasks = [
   {
     name: 'Finish this React App',
-    completed: false,
+    completed: true,
     important: true,
     date: '2023-06-26',
     repeat: 'Everyday',
@@ -35,7 +35,7 @@ const defaultTasks = [
   },
   {
     name: 'Drink water',
-    completed: true,
+    completed: false,
     important: true,
     repeat: 'Everyday',
     date: '',
@@ -44,7 +44,7 @@ const defaultTasks = [
   },
   {
     name: 'Go to the gym',
-    completed: true,
+    completed: false,
     important: false,
     date: '',
     repeat: 'Everyday',
@@ -185,12 +185,19 @@ function TodoProvider({ children }) {
     }
     saveLists(newLists);
   };
+  const addTaskToList = (listName, taskName) => {
+    const newLists = [...lists];
+    const index = newLists.findIndex((list) => list.name === listName);
+    newLists[index].tasks.push(taskName);
+    newLists[index].nTasks++;
+    saveLists(newLists);
+  };
   //Complete or uncomplete tasks
   const completeTask = (name) => {
     const newTasks = [...tasks];
     const index = newTasks.findIndex((task) => task.name === name);
     newTasks[index].completed = !newTasks[index].completed;
-    if (newTasks[index].listName !== 'None') {
+    if (newTasks[index].listName !== '') {
       const newLists = [...lists];
       const listIndex = newLists.findIndex(
         (list) => list.name === newTasks[index].listName
@@ -216,6 +223,18 @@ function TodoProvider({ children }) {
     newTasks[index] = editedTask;
     saveTasks(newTasks);
   };
+  //Add task
+  const addTask = (newTask) => {
+    const newTasks = [...tasks];
+    newTasks.push(newTask);
+    saveTasks(newTasks);
+  };
+  //Add list
+  const addList = (newList) => {
+    const newLists = [...lists];
+    newLists.push(newList);
+    saveLists(newLists);
+  };
   //Delete task
   const deleteTask = (name) => {
     const newTasks = [...tasks];
@@ -223,7 +242,7 @@ function TodoProvider({ children }) {
 
     //Eliminate task name from list
     const taskListName = newTasks[index].listName;
-    if (taskListName !== 'None') {
+    if (taskListName !== '') {
       const newLists = [...lists];
       const listIndex = newLists.findIndex(
         (list) => list.name === taskListName
@@ -268,6 +287,7 @@ function TodoProvider({ children }) {
   return (
     <TodoContext.Provider
       value={{
+        location,
         loadingTasks,
         loadingLists,
         errorTasks,
@@ -289,10 +309,13 @@ function TodoProvider({ children }) {
         changeListSelected,
         searchLists,
         searchTasks,
+        addTask,
+        addList,
         deleteTask,
         deleteList,
         editTask,
         updateListTask,
+        addTaskToList,
       }}
     >
       {children}

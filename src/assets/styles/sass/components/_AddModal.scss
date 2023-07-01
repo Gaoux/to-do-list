@@ -76,22 +76,22 @@
       }
     }
 
-    .radio-button .input#notes {
-      height: 100px;
-    }
-    //Only for add list modal
+    .input#notes,
     .input#description {
       height: 100px;
     }
-    .alert {
-      color: $light-red;
-    }
 
-    .expired-msg {
+    .msg-alert {
       font-size: $sm;
+      font-weight: bold;
       margin-left: 20px;
-      padding: 0;
-      font-weight: 100;
+      color: $alert-red;
+    }
+    .alert {
+      color: $alert-red;
+    }
+    .border-alert {
+      border: solid 0.5px $alert-red;
     }
     // Place Holder CSS
     ::-webkit-input-placeholder {
