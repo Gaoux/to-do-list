@@ -2,6 +2,11 @@
 
 This repository contains a simple To Do List application built with React.js.
 
+## Design
+
+![Design 1](/src/assets/images/design_1.png)
+![Design 2](/src/assets/images/design_2.png)
+
 ## Live Deployment
 
 The repository is currently deployed and accessible [here](https://gaoux.github.io/to-do-list/).
