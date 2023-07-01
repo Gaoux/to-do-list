@@ -39,7 +39,7 @@ function ListPage() {
       <div className="list-description">
         <p>{listSelected.description}</p>
       </div>
-      <TaskList completeTask={completeTask}>
+      <TaskList>
         {listTasks.map((task) => (
           <TaskItem
             key={task.name}
@@ -49,8 +49,8 @@ function ListPage() {
             date={task.date}
             important={task.important}
             notes={task.notes}
-            completeTask={() => completeTask(task.name)}
-            makeTaskImportant={() => makeTaskImportant(task.name)}
+            onCompleteClick={() => completeTask(task.name)}
+            onImportantClick={() => makeTaskImportant(task.name)}
             openInfo={() => changeTaskSelected(task.name)}
           />
         ))}

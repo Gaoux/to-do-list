@@ -1,15 +1,66 @@
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { TodoContext } from '../../TodoContext';
 
-function AddTaskModal(props) {
+function AddTaskModal({ show, setShow }) {
+  const { tasks, addTask, listSelected, location, addTaskToList } =
+    useContext(TodoContext);
   const [dateExpired, setDateExpired] = useState(false);
-  const [selectedDate, setSelectedDate] = useState('');
-  const handleClose = () => props.setShow(false);
-  // const handleShow = () => props.setShow(true);
 
+  const [newTask, setNewTask] = useState({
+    name: '',
+    completed: false,
+    important: false,
+    date: '',
+    repeat: 'One time',
+    notes: '',
+    listName: location.pathname === '/list-info' ? listSelected.name : '',
+  });
+
+  const [showAlreadyExistsAlert, setShowAlreadyExistsAlert] = useState(false);
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  useEffect(() => {
+    setNewTask({
+      name: '',
+      completed: false,
+      important: false,
+      date: '',
+      repeat: 'One time',
+      notes: '',
+      listName: location.pathname === '/list-info' ? listSelected.name : '',
+    });
+  }, [show, location.pathname, listSelected]);
+
+  const handleNameChange = (e) => {
+    const nameAlreadyExists = tasks.some(
+      (task) => task.name.toLowerCase() === e.target.value.toLowerCase()
+    );
+    if (nameAlreadyExists) setShowAlreadyExistsAlert(true);
+    else setShowAlreadyExistsAlert(false);
+
+    setNewTask((newTask) => ({
+      ...newTask,
+      name: e.target.value,
+    }));
+  };
+  const handleRepeatChange = (e) => {
+    setNewTask((newTask) => ({
+      ...newTask,
+      repeat: e.target.value,
+    }));
+  };
   const handleDateChange = (e) => {
+    setNewTask((newTask) => ({
+      ...newTask,
+      date: e.target.value,
+    }));
     //Current Date
     var currDate = new Date();
     currDate.setDate(currDate.getDate());
@@ -34,12 +85,29 @@ function AddTaskModal(props) {
       else setSelectedDate('');
     }
   };
+  const handleNotesChange = (e) => {
+    setNewTask((newTask) => ({
+      ...newTask,
+      notes: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (location.pathname === '/list-info') {
+      addTaskToList(listSelected.name, newTask.name);
+      console.log(newTask);
+    }
+    addTask(newTask);
+    handleClose();
+  };
 
   return (
     <>
       <Modal
         className="add-modal"
-        show={props.show}
+        show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
@@ -54,19 +122,29 @@ function AddTaskModal(props) {
           />
         </Modal.Header>
         <Modal.Body className="add-modal__body">
-          <form className=" rounded px-8 pt-6 pb-8 mb-4">
+          <form className=" rounded px-8 pt-6 pb-8 mb-4" onSubmit={onSubmit}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="name"
               >
-                Name *
+                Name
+                <span
+                  className={`msg-alert ${!showAlreadyExistsAlert && 'hide'}`}
+                >
+                  Task name already exists
+                </span>
               </label>
               <input
-                className="input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className={`input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  showAlreadyExistsAlert && 'border-alert'
+                }`}
                 id="name"
                 type="text"
                 placeholder="Task name"
+                value={newTask.name}
+                onChange={handleNameChange}
+                required
               />
             </div>
 
@@ -76,7 +154,7 @@ function AddTaskModal(props) {
                 htmlFor="duedate"
               >
                 Due Date {selectedDate}
-                <span className={dateExpired ? 'expired-msg alert' : 'hide'}>
+                <span className={`msg-alert ${!dateExpired && 'hide'}`}>
                   Task has already expired
                 </span>
               </label>
@@ -88,6 +166,7 @@ function AddTaskModal(props) {
                 // className="input shadow appearance-none rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="duedate"
                 type="date"
+                value={newTask.date}
                 onChange={handleDateChange}
               />
             </div>
@@ -106,13 +185,14 @@ function AddTaskModal(props) {
                     id="one-time"
                     name="repeat"
                     defaultChecked
-                    value="one time"
+                    value="One time"
+                    onChange={handleRepeatChange}
                   />
                   <label
                     className="radio-button__label ml-2 cursor-pointer"
                     htmlFor="one-time"
                   >
-                    <span class="radio-button__custom"></span>
+                    <span className="radio-button__custom"></span>
                     One Time
                   </label>
                 </div>
@@ -122,13 +202,14 @@ function AddTaskModal(props) {
                     type="radio"
                     id="everyday"
                     name="repeat"
-                    value="eveyday"
+                    value="Everyday"
+                    onChange={handleRepeatChange}
                   />
                   <label
                     className="radio-button__label ml-2 cursor-pointer"
                     htmlFor="everyday"
                   >
-                    <span class="radio-button__custom"></span>
+                    <span className="radio-button__custom"></span>
                     Everyday
                   </label>
                 </div>
@@ -146,11 +227,13 @@ function AddTaskModal(props) {
                 id="notes"
                 type="text"
                 placeholder="Say something about the task"
+                value={newTask.notes}
+                onChange={handleNotesChange}
               />
             </div>
             <button
               className="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
-              form="addtask"
+              disabled={showAlreadyExistsAlert}
             >
               add task
             </button>
