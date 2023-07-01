@@ -97,7 +97,6 @@ function AddTaskModal({ show, setShow }) {
 
     if (location.pathname === '/list-info') {
       addTaskToList(listSelected.name, newTask.name);
-      console.log(newTask);
     }
     addTask(newTask);
     handleClose();
