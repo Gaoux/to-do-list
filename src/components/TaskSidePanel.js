@@ -5,9 +5,11 @@ import { TodoContext } from '../TodoContext';
 
 function TaskSidePanel() {
   const {
+    tasks,
     lists,
     taskSelected,
     updateListTask,
+    showTaskSidePanel,
     setShowTaskSidePanel,
     editTask,
     deleteTask,
@@ -33,7 +35,13 @@ function TaskSidePanel() {
   };
 
   return (
-    <div className="side-panel d-flex flex-column flex-shrink-0 p-3 ">
+    <div
+      className={`side-panel d-flex flex-column flex-shrink-0 p-3 ${
+        showTaskSidePanel &&
+        tasks.includes(taskSelected) &&
+        'side-panel--active'
+      }`}
+    >
       <svg className="bi me-2" width="40" height="32">
         <use xlinkHref="#bootstrap"></use>
       </svg>
@@ -57,7 +65,7 @@ function TaskSidePanel() {
           <input
             className="input "
             type="date"
-            value={taskSelected.date}
+            value={taskSelected.date || ''}
             onChange={handleDateChange}
           />
         </div>

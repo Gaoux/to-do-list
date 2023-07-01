@@ -2,9 +2,21 @@
 
 .search-container {
   color: $dark-grey;
-  .title {
-    font-size: $lg;
+
+  .icon-container {
+    position: absolute;
+    text-align: center;
+    top: 40px;
+    .title {
+      font-size: $lg;
+    }
   }
+  @media screen and (max-width: 670px) {
+    .icon-container {
+      top: 10px;
+    }
+  }
+
   .footer {
     position: absolute;
     bottom: 0;

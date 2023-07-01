@@ -1,15 +1,23 @@
 @use '../abstracts/variables' as *;
 
+.modal-content {
+  border-radius: 20px;
+}
+
 .add-modal {
   &__header {
     border-radius: 0;
     color: $white;
     background-color: $secondary-color;
     border: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   &__body {
     background-color: $primary-color;
     border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     label {
       color: $very-light-grey;
     }

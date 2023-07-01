@@ -255,7 +255,7 @@ function TodoProvider({ children }) {
       const indexOfTask = newLists[listIndex].tasks.findIndex(
         (taskName) => taskName === name
       );
-      newLists.splice(indexOfTask, 1);
+      newLists[listIndex].tasks.splice(indexOfTask, 1);
       newLists[listIndex].nTasks = newLists[listIndex].tasks.length;
       if (newTasks[index].completed === true) {
         newLists[listIndex].nTasksCompleted =

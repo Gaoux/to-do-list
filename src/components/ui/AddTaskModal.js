@@ -115,6 +115,7 @@ function AddTaskModal({ show, setShow }) {
         <Modal.Header className="add-modal__header">
           <Modal.Title>Add a task</Modal.Title>
           <FontAwesomeIcon
+            className="icon"
             icon={faX}
             onClick={handleClose}
             style={{ cursor: 'pointer' }}

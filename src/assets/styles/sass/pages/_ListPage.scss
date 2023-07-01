@@ -20,6 +20,11 @@
       transition: transform 0.2s;
       cursor: pointer;
     }
+    @media screen and (max-width: 600px) {
+      button.delete {
+        margin-left: 35px;
+      }
+    }
   }
   .list-description {
     color: $dark-grey;

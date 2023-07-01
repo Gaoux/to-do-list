@@ -14,15 +14,12 @@ import React, { useContext } from 'react';
 
 function AppUI() {
   const {
-    tasks,
     loadingTasks,
     loadingLists,
     loadingListSelected,
     // errorTasks,
     // errorLists,
     //errorListSelected,
-    showTaskSidePanel,
-    taskSelected,
   } = useContext(TodoContext);
 
   return (
@@ -48,7 +45,7 @@ function AppUI() {
         </Routes>
       )}
 
-      {showTaskSidePanel && tasks.includes(taskSelected) && <TaskSidePanel />}
+      <TaskSidePanel />
     </>
   );
 }

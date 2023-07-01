@@ -2,12 +2,17 @@
 
 .side-panel {
   position: fixed;
-  right: 0;
+  right: -10px;
+  transform: translate(100%, 0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
   background-color: $secondary-color;
   width: 350px;
   height: 100%;
   top: 0;
   color: $white;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: 0 0 10px #000000;
   z-index: 100002;
 
   label {
@@ -54,4 +59,7 @@
       transition: transform 0.2s;
     }
   }
+}
+.side-panel--active {
+  transform: none;
 }
