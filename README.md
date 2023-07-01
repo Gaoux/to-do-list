@@ -2,13 +2,16 @@
 
 This repository contains a simple To Do List application built with React.js.
 
+## Live Deployment
+
+The repository is currently deployed and accessible [here](https://gaoux.github.io/to-do-list/).
+
 ## Features
 
 ### Task Management
 
-- Users can create, update, and delete tasks.
+- Users can create and delete tasks.
 - Each task includes a title, due date, repeat option, notes, importance and status (e.g., completed or in progress).
-- Users can set reminders for tasks.
 - Tasks can be prioritized.
 
 ### List Management
