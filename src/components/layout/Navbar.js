@@ -74,7 +74,7 @@ function Navbar() {
                 ></img>
               </a>
 
-              <a href="/">
+              <a href="www.linkedin.com/in/gustavo-parra-tanoux-39b28127a">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
                   alt="LinkedIn Logo"
